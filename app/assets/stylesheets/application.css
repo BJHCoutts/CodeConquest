@@ -13,3 +13,50 @@
  *= require_tree .
  *= require_self
  */
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
+
+body,
+html {
+  color: whitesmoke;
+  font-family: "Comfortaa", cursive;
+  height: 100%;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("Conquestbg.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  margin: 2 em;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 0.5 em;
+  /* background: cornflowerblue; */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.border {
+  border: solid whitesmoke;
+  border-width: 0.25em;
+  border-radius: 0.25em;
+}
+
+.title {
+  text-align: center;
+}
