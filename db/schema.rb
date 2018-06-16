@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_023814) do
+ActiveRecord::Schema.define(version: 2018_06_16_032328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2018_06_16_023814) do
     t.index ["drill_group_id"], name: "index_drills_on_drill_group_id"
   end
 
+  create_table "takes", force: :cascade do |t|
+    t.bigint "drill_group_id"
+    t.bigint "user_id"
+    t.integer "taken_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drill_group_id"], name: "index_takes_on_drill_group_id"
+    t.index ["user_id"], name: "index_takes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "last_name"
     t.string "first_name"
@@ -50,4 +60,6 @@ ActiveRecord::Schema.define(version: 2018_06_16_023814) do
 
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
+  add_foreign_key "takes", "drill_groups"
+  add_foreign_key "takes", "users"
 end
