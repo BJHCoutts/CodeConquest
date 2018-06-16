@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@drill_group) do |f| %>
   <%= f.input :title, required: true%>
   <%= f.input :difficulty, as: :radio_buttons, collection: [["Beginner", 'Beginner'], ["Intermediate", 'Intermediate'], ["Advanced", 'Advanced']]%>
