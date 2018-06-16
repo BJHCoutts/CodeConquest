@@ -6,7 +6,7 @@ class DrillGroupsController < ApplicationController
   end
 
   def create
-    @drill_group = DrillGroup.new(params[:client])
+    @drill_group = DrillGroup.new(drill_group_params)
     @dirll_group.save
   end
 
