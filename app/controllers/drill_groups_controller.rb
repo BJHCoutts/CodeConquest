@@ -17,11 +17,10 @@ class DrillGroupsController < ApplicationController
   end
 
   def index
-    @drill_groups = DrillGroup.order(create_at: :desc)
+    @drill_groups = DrillGroup.order(created_at: :desc)
   end
 
   def show
-  
   end
 
   def destroy
