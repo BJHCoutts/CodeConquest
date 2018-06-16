@@ -1,4 +1,4 @@
 class DrillGroup < ApplicationRecord
   belongs_to :user
-  has_many :drills
+  has_many :drills, dependent: :nullify
 end
