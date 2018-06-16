@@ -14,12 +14,20 @@
     <%= f.text_area :description %>
   </div>
   <div>
-    <%= f.label :questions %>
-    <%= f.text_field :questions %>
-  </div>
-  <div>
-    <%= f.label :answers %>
-    <%= f.text_field :answers %>
+    <div>
+      <%= f.label :questions %>
+      <%= f.text_field :questions %>
+    </div>
+    <div>
+      <%= f.label :answers %>
+      <br>
+      <% 5.times do %>
+        <%= f.check_box :answers%>
+        <%= f.text_field :answers %>
+        <br>
+      <% end %>
+    </div>
+    </div>
   </div>
   <%= f.submit %>
 <% end %>
