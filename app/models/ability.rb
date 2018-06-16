@@ -9,7 +9,10 @@ class Ability
       can :read, :all
     end
  
-    can :update, Article, :published => true
+    
+    can(:manage, DrillGroup) do |drill_group|
+      drill_group.user == user
+    end
   
   end
 end

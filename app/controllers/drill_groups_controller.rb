@@ -36,7 +36,15 @@ class DrillGroupsController < ApplicationController
   def find_drill_group
     @drill_group = DrillGroup.find(params[:id])
   end
+
   def drill_group_params
     params.require(:drill_group).permit(:title, :description, :difficulty)
+  end
+
+  def authorize_user!
+    unless can?(:mange, @drill_group)
+      flash[:alert] = "Access Denied"
+      # redirect_to 
+    end
   end
 end
