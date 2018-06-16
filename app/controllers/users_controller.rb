@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def leaderboard
     @leaders = User.order('score': :desc).limit(10).where('score IS NOT NULL')
+    #we might change this controller later and add more features
   end
 
 
