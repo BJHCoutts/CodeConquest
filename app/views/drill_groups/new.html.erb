@@ -1,0 +1,8 @@
+<% if can? :manage, @drill_group %>  
+  <%= simple_form_for(@drill_group) do |f| %>
+    <%= f.input :title, required: true%>
+    <%= f.input :difficulty, as: :radio_buttons, collection: [["Beginner", 'Beginner'], ["Intermediate", 'Intermediate'], ["Advanced", 'Advanced']]%>
+    <%= f.input :description, hint: 'minimum 16 character'%>
+    <%= f.submit %>
+  <% end %>
+<% end %>
