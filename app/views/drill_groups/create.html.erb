@@ -1,0 +1,7 @@
+
+<%= simple_form_for(@drill_group) do |f| %>
+  <%= f.input :title, required: true%>
+  <%= f.collection_radio_buttons :difficulty, [[vegan, 'vegan'] ,[vegetarian, 'vegetarian']]%>
+  <%= f.input :description, hint: 'minimum 16 character'%>
+  <%= f.submit %>
+<% end %>
