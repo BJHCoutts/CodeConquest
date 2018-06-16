@@ -1,28 +1,3 @@
 <h1>New Drill</h1>
-<% if @drill.errors.any? %>
-  <ul>
-    <% @drill.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
 
-<%= form_for @drill do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div>
-    <%= f.label :questions %>
-    <%= f.text_field :questions %>
-  </div>
-  <div>
-    <%= f.label :answers %>
-    <%= f.text_field :answers %>
-  </div>
-  <%= f.submit %>
-<% end %>
+<%= render "form" %>
