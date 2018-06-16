@@ -1,0 +1,27 @@
+< @drill.each do |drill| %>
+<hr>
+  <div class="card" style="width: 58rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= drill.title %><h5>
+      <p class="card-text"><%= drill.description %></p>
+
+      <a href='<%= drill_path(drill) %>' class='card-link'>Enter Skirmish!</a><br>
+
+      <% if can?(:manage, drill) %>
+
+      <%= link_to "Edit", edit_drill_path(drill), class: "btn btn-primary" %>
+
+      <%= link_to(
+          'Delete',
+          drill_path(drill),
+          method: :delete,
+          data: {
+            confirm: 'delete for realsees?'
+          },
+          class: "btn btn-danger"
+        )
+      %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
