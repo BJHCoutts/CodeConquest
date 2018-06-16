@@ -13,6 +13,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def leaderboard
+    @leaders = User.order('score': :desc).limit(10).where('score IS NOT NULL')
+  end
+
+
+
   private
   def user_params
     params.require(:user).permit(
