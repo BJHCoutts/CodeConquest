@@ -14,4 +14,6 @@
 //= require bootstrap
 //= require rails-ujs
 //= require activestorage
+//= require anime.min
+//= require main
 //= require_tree .
