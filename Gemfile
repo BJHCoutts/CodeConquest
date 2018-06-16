@@ -46,6 +46,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'hirb'
   gem 'faker'
+  gem 'cowsay'
 end
 
 group :development do
