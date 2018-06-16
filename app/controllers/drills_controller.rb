@@ -5,11 +5,19 @@ class DrillsController < ApplicationController
 
     def create
         @drill = Drill.new drill_params
+
         if @drill.save 
-            render text: "Drill created successfully"
+            drill_params[:answers].each do |answer|
+                @drill.answers.create(answer)
+            end
+            render text: "Skirmish created successfully"
         else
             render :new
         end
+    end
+
+    def edit
+        @drill = Drill.find params[:id]
     end
 
 
