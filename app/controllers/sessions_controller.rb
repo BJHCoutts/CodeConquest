@@ -7,6 +7,10 @@ class SessionsController < ApplicationController
     
     if user&.authenticate(params[:session][:password])
       session[:user_id] = user.id
+<<<<<<< HEAD
+=======
+
+>>>>>>> 77201b06dbb4c55892555ed7e64ed2b482797410
       redirect_to root_path, notice: "Logged in"
     else
       flash[:alert] = "Wrong email or password"
