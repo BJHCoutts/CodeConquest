@@ -7,7 +7,12 @@ class DrillGroupsController < ApplicationController
 
   def create
     @drill_group = DrillGroup.new(drill_group_params)
-    @dirll_group.save
+    @drill_group.user = current_user
+    if @dirll_group.save
+      redirect_to drill_group_path(@drill_group)
+    else
+      render :new
+    end
   end
 
   def show
