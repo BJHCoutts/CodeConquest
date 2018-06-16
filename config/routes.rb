@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   get '/' => 'welcome#index', as: 'root'
 
+  #Drill Routes
+  resources :drills
 end
