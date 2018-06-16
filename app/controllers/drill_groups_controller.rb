@@ -1,12 +1,13 @@
 class DrillGroupsController < ApplicationController
   before_action :find_drill_group
-  
+
   def new
     @drill_group = DrillGroup.new
   end
 
   def create
-  
+    @drill_group = DrillGroup.new(params[:client])
+    @dirll_group.save
   end
 
   def show
@@ -14,7 +15,7 @@ class DrillGroupsController < ApplicationController
   end
 
   def index
-  
+    
   end
 
   def destroy
