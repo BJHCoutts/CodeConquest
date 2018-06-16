@@ -36,6 +36,8 @@ gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'cancancan', '~> 2.0'
+
 gem 'simple_form'
 
 group :development, :test do
@@ -46,6 +48,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'hirb'
   gem 'faker'
+  gem 'cowsay'
 end
 
 group :development do

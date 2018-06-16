@@ -3,13 +3,11 @@ Rails.application.routes.draw do
 
   get '/' => 'welcome#index', as: 'root'
   
-  #Drill Routes
-  
-  resources :drill_groups
-  resources :drills
   resources :users, only: [:new, :create]
   resource :sessions, only: [:new, :destroy, :create]
-
+  resources :drill_groups
+  resources :drills
+  
 end
 
 

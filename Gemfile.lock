@@ -55,6 +55,7 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
+    cancancan (2.2.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -64,6 +65,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    cowsay (0.3.0)
     crass (1.0.4)
     erubi (1.7.1)
     execjs (2.7.0)
@@ -197,7 +199,9 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   byebug
+  cancancan (~> 2.0)
   coffee-rails (~> 4.2)
+  cowsay
   faker
   hirb
   jbuilder (~> 2.5)
