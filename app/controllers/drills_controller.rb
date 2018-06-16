@@ -1,4 +1,6 @@
 class DrillsController < ApplicationController
+    before_action :authenticate_user!
+
     def new
         @drill = Drill.new
     end
@@ -10,19 +12,26 @@ class DrillsController < ApplicationController
             drill_params[:answers].each do |answer|
                 @drill.answers.create(answer)
             end
-            render text: "Skirmish created successfully"
+            redirect_to drills_path(@drill)
         else
             render :new
         end
     end
 
-    def edit
-        
+    def show
+        @drill = Drill.find params[:id]
     end
 
     def edit
         @drill = Drill.find params[:id]
     end
+
+    def destroy
+        @drill = Drill.find(params[:id])
+        @drill.destroy
+    
+        redirect_to drills_path
+      end
 
 
     private

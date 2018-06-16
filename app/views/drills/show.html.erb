@@ -1,0 +1,23 @@
+<h1><%= @drill.title %></h1>
+
+<p><%= @drill.description %></p>
+
+<%= @drill.each do |drill|%>
+    <p><%= drill.answers %></p>
+<% end %>
+
+<% if can?(:manage, drill) %>
+
+    <%= link_to "Edit", edit_drill_path(drill), class: "btn btn-primary" %>
+
+    <%= link_to(
+       'Delete',
+        drill_path(drill),
+        method: :delete,
+        data:{
+        confirm: 'really delete?'
+        },
+        class: "btn btn-danger"
+        )
+    %>
+<% end %>
