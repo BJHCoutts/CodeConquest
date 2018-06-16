@@ -1,5 +1,5 @@
 class DrillGroupsController < ApplicationController
-  before_action :find_drill_group
+  before_action :find_drill_group, only: [:show, :destroy, :edit]
 
   def new
     @drill_group = DrillGroup.new
