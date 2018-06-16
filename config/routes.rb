@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   #Drill Routes
+  
+  resources :drill_groups
   resources :drills
+
 end
