@@ -1,0 +1,21 @@
+html {
+  font-family: Helvetica, sans-serif;
+}
+
+* {
+  margin: 0;
+  font-family: inherit;
+  word-wrap: break-word;
+}
+
+body {
+  box-sizing: border-box; // width:100vw;
+}
+
+.collapse {
+  justify-content: flex-end;
+}
+
+#logo-svg {
+  margin-right: 1rem;
+}
