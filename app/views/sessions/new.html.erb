@@ -1,17 +1,8 @@
-
-<h1>Sign In</h1>
-
-<%= form_tag sessions_path do %>
-  <div>
-    <%= label_tag :email %>
-    <%= email_field_tag :email %>
-  </div>
-  <div>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-  <div>
-    <%= submit_tag "Log In" %>
-  </div>
+<%= simple_form_for :session, url: session_path do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, required: true%>
+  <%= f.label :password %>
+  <%= f.password_field :password, required: true%>
+  <%= f.submit "Sign in"%>
 <% end %>
 
