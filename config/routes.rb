@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :drill_groups
   resources :drills
   resources :users, only: [:new, :create]
-  
+  resource :sessions, only: [:new, :destroy, :create]
 
 end
 
