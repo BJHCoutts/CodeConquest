@@ -50,7 +50,7 @@ end
 
 dgs = DrillGroup.all
 
-10.times.each do
+100.times.each do
   questions = []
   answers = []
   10.times.each do 
