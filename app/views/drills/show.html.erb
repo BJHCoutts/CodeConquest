@@ -6,6 +6,10 @@
     <input type="checkbox" class="form-check-input" id="checkbox100" checked="checked">
     <label class="form-check-label" for="checkbox100">Classic checkbox</label>
 </div>
+<% @drill.questions.each  do |q|%>
+  <%= q.body %>
+  <%= q.options %>
+<% end %>
 
 <div class="form-check">
     <input type="checkbox" class="filled-in form-check-input" id="checkbox101" checked="checked">

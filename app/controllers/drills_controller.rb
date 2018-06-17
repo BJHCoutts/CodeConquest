@@ -20,7 +20,7 @@ class DrillsController < ApplicationController
   end
 
   def show
-    @questions = @drill.question
+    @questions = @drill.questions
   end
 
   def edit
