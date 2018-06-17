@@ -2,7 +2,9 @@
 	
 	<h1 class="display-4"><%= @drill.title %></h1>
   <p class="lead"><%= @drill.description %></p>
-  
+	<% if current_user.admin %>
+  <a class="btn btn-primary" href="<%=new_drill_question_path(@drill)%>" role="button">Add Questions</a>
+	<% end %>
 	<hr class="my-4">
 	<%=form_tag drill_transcripts_path(@drill), :method => :post do %>
 		<% @questions.each_with_index  do |q, index|%>
@@ -19,6 +21,9 @@
 			<div>
 			<hr class="my-4">
 		<% end %>
+		
 		<button type="submit" class="btn btn-primary">Submit</button>
 	<% end %>
+
+	
 </div>
