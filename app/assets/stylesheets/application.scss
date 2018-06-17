@@ -16,6 +16,10 @@
 @import "material";
 @import "main";
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Righteous");
+@font-face {
+  font-family: "mortalkombat2";
+  src: url("<%= asset_path("fonts/mortalkombat2") %>");
+}
 
 .font {
   font-family: "Righteous", cursive;
