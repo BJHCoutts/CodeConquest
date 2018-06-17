@@ -6,35 +6,16 @@
     <input type="checkbox" class="form-check-input" id="checkbox100" checked="checked">
     <label class="form-check-label" for="checkbox100">Classic checkbox</label>
 </div>
+<% @drill.questions.each  do |q|%>
+  <%= q.body %>
+  <%= q.options %>
+<% end %>
 
 <div class="form-check">
     <input type="checkbox" class="filled-in form-check-input" id="checkbox101" checked="checked">
     <label class="form-check-label" for="checkbox101">Filled-in checkbox</label>
 </div>
 
-<% options = ("a".."z").to_a %>
-<% @drill.questions.each_with_index do |q, index| %>
-  <div>
-    <%= index + 1%>. <%= q["title"] %>
-    <% q["options"].each_with_index do |o, index| %>
-      <p><%= options[index]%>) <%=o%></p>
-    <% end %>
-  </div>
-<% end %>
 
 
-<% if can?(:manage, @drill) %>
 
-  <%= link_to "Edit", edit_drill_path(@drill), class: "btn btn-primary" %>
-
-  <%= link_to(
-    'Delete',
-    drill_path(@drill),
-    method: :delete,
-    data:{
-    confirm: 'really delete?'
-    },
-    class: "btn btn-danger"
-    )
-  %>
-<% end %>
