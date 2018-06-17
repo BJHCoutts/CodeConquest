@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag '_form' %>
 <%= form_for @drill do |f| %>
     <% if @drill.errors.present? %>
         <p>
@@ -5,17 +6,17 @@
         </p>
     <% end %>
 
-  <div>
-    <%= f.label :title %>
+  <div class='container'>
+    <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div>
-    <%= f.label :description %>
+    <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
   <div>
     <div>
-      <%= f.label :questions %>
+      <%= f.label :questions %><br>
       <%= f.text_field :questions %>
     </div>
     <div>

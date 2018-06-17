@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codeconquest</title>
+    <title>Code Conquest</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -19,9 +19,9 @@
 				<polygon class="polymorph" points="105.5,172.4 0,142.7 174.8,146.1 114.8,240.4 171.9,70.1 240.4,158 100.9,49.4 203.2,9.4 59.9,112.6 54.6,0 " />
 			</svg>
 			<% if user_signed_in? %>
-				<a class="navbar-brand" href="/">Welcome! <%= current_user.first_name %></a>
+				<a class="navbar-brand font" href="/">Welcome! <%= current_user.first_name %></a>
 			<% else %>
-				<a class="navbar-brand" href="/">Code Conquest</a>
+				<a class="navbar-brand font" href="/">Code Conquest</a>
 			<% end %>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
