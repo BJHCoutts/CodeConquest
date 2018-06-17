@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_110341) do
+ActiveRecord::Schema.define(version: 2018_06_17_233219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_06_17_110341) do
   create_table "drill_groups", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "difficulty"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_110341) do
     t.bigint "drill_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "difficulty"
     t.index ["drill_group_id"], name: "index_drills_on_drill_group_id"
   end
 
