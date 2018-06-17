@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat|Righteous");
-
 body,
 html {
   height: 100%;
@@ -11,10 +9,6 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.font {
-  font-family: "Righteous", cursive;
 }
 
 .title {
@@ -40,4 +34,7 @@ html {
   justify-content: space-around;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+.white {
+  color: whitesmoke;
 }

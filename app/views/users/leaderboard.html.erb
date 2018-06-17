@@ -1,12 +1,15 @@
-<h2>
-  Our leaders
-</h2>
+<%= stylesheet_link_tag 'leaderboard' %>
 
-<div>
+<div class="container mk parallax">
+<h1 style="padding:1em 0 0 0">
+  HIGH SCORES
+</h1>
   <% @leaders.each do |stats| %>
- <hr>
-  User <%= stats.email %> has the score of 
+ <div class="entry">
+  User <%= stats.email %><br/>has the score of
   <%= stats.score %> points.
+  </div>
   <% end %>
+
 </div>
 

@@ -1,0 +1,30 @@
+body,
+html {
+  height: 100%;
+}
+
+.mk {
+  color: red;
+  font-family: "mortalkombat2";
+}
+
+.parallax {
+  background-image: url("mk.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  height: auto;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.entry {
+  font-size: 2rem;
+  padding: 1rem;
+}

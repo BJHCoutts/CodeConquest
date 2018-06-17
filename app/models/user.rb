@@ -3,9 +3,6 @@ class User < ApplicationRecord
 
   has_many :drill_groups, dependent: :nullify
   has_many :taken_questions, through: :transcripts, source: :question
-
-
- 
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
