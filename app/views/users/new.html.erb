@@ -1,23 +1,33 @@
 <div class="container">
-  <h1>Sign Up Page - New User</h1>
+  <h1>Sign up</h1>
   <%= simple_form_for @user, :from => { class: 'input-group' }  do |f| %>
     <div class="form-group">
-      <%= f.input :first_name, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <%= f.input :first_name, input_html: { class: 'form-control' },  required: true %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.input :last_name, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <%= f.input :last_name, input_html: { class: 'form-control' },  required: true %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.input :email, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <%= f.input :email, input_html: { class: 'form-control' },  required: true %>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.input :password, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <%= f.input :password, input_html: { class: 'form-control' },  required: true %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.input :password_confirmation, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <%= f.input :password_confirmation, input_html: { class: 'form-control' },  required: true %>
+      </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Submit">
+    <button type="submit" class="btn btn-primary">Sign up</button>
   <% end %>
 </div>
 
