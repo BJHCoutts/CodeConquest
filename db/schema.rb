@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_214732) do
+ActiveRecord::Schema.define(version: 2018_06_17_060249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,22 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
   create_table "drills", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.json "questions", array: true
-    t.string "answers", array: true
     t.integer "taken"
     t.bigint "drill_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["drill_group_id"], name: "index_drills_on_drill_group_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "body"
+    t.string "answer"
+    t.string "options"
+    t.string "point"
+    t.bigint "drill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drill_id"], name: "index_questions_on_drill_id"
   end
 
   create_table "takes", force: :cascade do |t|
@@ -61,6 +70,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
 
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
+  add_foreign_key "questions", "drills"
   add_foreign_key "takes", "drill_groups"
   add_foreign_key "takes", "users"
 end
