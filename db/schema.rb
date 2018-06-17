@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_110341) do
   create_table "questions", force: :cascade do |t|
     t.string "body"
     t.string "answer"
-    t.string "options", array: true
+    t.string "options", default: [], array: true
     t.integer "point"
     t.bigint "drill_id"
     t.datetime "created_at", null: false
