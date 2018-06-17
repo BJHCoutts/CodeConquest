@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   def create
     drill = Drill.find(params[:drill_id])
+    # byebug
     question = Question.create(question_params)
     question.drill = drill
     if question.save
@@ -25,7 +26,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:body, :answer, :point, :options => [])
-    # params.require(:question).permit(:question_details, :question_content, :user_id, :accepted_answer_id, :province_id, :city, :category_ids => [])
+    params.permit(:body, :answer, :point, :options => [])
   end
 end

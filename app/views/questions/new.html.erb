@@ -1,6 +1,6 @@
 <div class="container mt-4">
-  <h1 class="display-4" style="font-size:5vw" >New Question on <%=@drill.title%></h1>
-  <%=form_tag new_drill_question_path(@drill), :method => :post do %>
+  <h1 class="display-4" style="font-size:5vw">New Question on <%=@drill.title%></h1>
+  <%=form_tag drill_questions_path(@drill), :method => :post, :id => "question_form" do %>
     <div class="form-group">
       <div class="floating-label">
         <label for="question-body">What is your question?</label>
@@ -19,32 +19,39 @@
                 <label class="custom-control-label" for="option-radio-<%= index %>"></label>
               </div>
             </div>
-            <input type="text" class="form-control is-valid" style="font-size:2vw" id="Option-<%=option%>" placeholder="Option <%=option%>" aria-describedby="Option-<%=option%>" required>
+            <input type="text" class="form-control is-valid" name="options[]" style="font-size:2vw" id="Option-<%=option%>" placeholder="Option <%=option%>" aria-describedby="Option-<%=option%>" required>
           </div>
         </div>
       <% end %>
     </div>
-    <button type="submit" class="btn btn-success new-question mt-4">Create New Question</button>
+    <button type="submit" class="btn btn-secondary new-question mt-4">Create</button>
   <% end %>
-
-
-
 </div>
+
   <script>
     let index = 0;
-    $('button.new-question').click( async function (e) {
+    let form = $("#question_form")
+    $('button.new-question').click(function (e) {
     
     e.preventDefault();
-    try {
-      let CSStransforms = await anime({
-        targets: this,
-        duration: 1000,
-        scale: 0,
-        easing: "linear"
-      })
-      await $(this).submit();
-    } catch(error) {
-      throw new Error(error);
-    }
+
+    $("button.new-question")
+      .html(
+        `<i class="material-icons">
+          check_circle
+        </i>`
+      )
+
+    let radiofy = anime({
+      targets: this,
+      duration: 1000,
+      borderRadius: ['0em', '2em'],
+      backgroundColor: "#4CAE4F",
+      easing: "linear"
+    })
+
+    radiofy.finished.then(() => {
+      form.submit();
+    })
 	})
   </script>

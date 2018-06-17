@@ -12,9 +12,9 @@ html {
 }
 
 .title {
-  margin: 6rem;
+  margin: 6vh 0 8vh 0;
   text-align: center;
-  font-size: 5rem;
+  font-size: 9vw;
   color: whitesmoke;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
@@ -28,10 +28,13 @@ html {
 }
 
 .buttons {
-  margin: 4rem 0rem 8rem 0rem;
+  margin: 8rem 0rem 10rem 0rem;
   display: flex;
-  font-size: 2rem;
+  font-size: 5vw;
   justify-content: space-around;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+.white {
+  color: whitesmoke;
 }

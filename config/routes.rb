@@ -15,4 +15,7 @@ Rails.application.routes.draw do
       resources :transcripts, only: [:create, :show]
     end
   end
+  namespace :admin do
+        resources :dashboard, only: [:index]
+  end
 end
