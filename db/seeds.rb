@@ -24,7 +24,8 @@ admin_user = User.create(
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
     password: PASSWORD,
     admin: false,
-    approved_student: [true, false].sample
+    approved_student: [true, false].sample,
+    score: 0
   )
 end
 
