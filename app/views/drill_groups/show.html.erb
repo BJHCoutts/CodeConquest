@@ -5,5 +5,27 @@
     <p class="lead"><%=@drill_group.description%></p>
     <p class="lead"><%=@drill_group.difficulty%></p>
     <hr class="my-4">
+    <div class="accordion" id="accordionExample">
+      <%# drill_groups.drills.each do |drill|%>
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <%#=drill.title%>
+                Javascript
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon </p>
+              <a class="btn btn-primary" href="<%#=drill_path(drill)%>" role="button">Take this drill</a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    <%#=end%>
   </div>
 </div>
