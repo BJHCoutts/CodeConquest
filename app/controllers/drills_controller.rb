@@ -1,5 +1,6 @@
 class DrillsController < ApplicationController
     before_action :authenticate_user!
+    before_action :find_drill, only: [:show, :destroy, :edit]
 
     def new
         @drill = Drill.new
@@ -38,4 +39,6 @@ class DrillsController < ApplicationController
     def drill_params
         params.require(:drill).permit(:title, :description, :questions, :answers)
     end
+
+
 end
