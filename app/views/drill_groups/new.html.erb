@@ -1,11 +1,25 @@
-<%= stylesheet_link_tag '_form' %>
-<% if can? :manage, @drill_group %>  
-<div class="container">
-  <%= simple_form_for(@drill_group) do |f| %>
-    <%= f.input :title, required: true%>
-    <%= f.input :difficulty, as: :radio_buttons, collection: [["Beginner", 'Beginner'], ["Intermediate", 'Intermediate'], ["Advanced", 'Advanced']]%>
-    <%= f.input :description, hint: 'minimum 16 character'%>
-    <%= f.submit %>
-</div>
-  <% end %>
+<% if can? :manage, @drill_group %>
+  <div class="container mt-4">
+    <%= simple_form_for @drill_group, :from => { class: 'input-group' }  do |f| %>
+      <div class="form-group">
+        <div class="floating-label textfield-box">
+          <%= f.input :title, input_html: { class: 'form-control' },  required: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="floating-label textfield-box">
+          <%= f.input :description, input_html: { class: 'form-control' },  required: true %>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mb-4"> 
+        <% ["Beginner", "Intermediate", "Advanced"].each do |level| %>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline<%= level %>" name="difficulty" class="custom-control-input" value="<%=level%>">
+            <label class="custom-control-label" for="customRadioInline<%= level %>"><%=level%></label>
+          </div>
+        <% end %>
+      </div>
+      <button type="submit" class="btn btn-primary"> Create </button>
+    <% end %>
+  </div>
 <% end %>

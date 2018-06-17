@@ -9,6 +9,7 @@ class DrillGroupsController < ApplicationController
   def create
     @drill_group = DrillGroup.new(drill_group_params)
     @drill_group.user = current_user
+
     if @drill_group.save
       redirect_to drill_group_path(@drill_group)
     else
@@ -41,7 +42,7 @@ class DrillGroupsController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:mange, @drill_group)
+    unless can?(:manage, @drill_group)
       flash[:alert] = "Access Denied"
       # redirect_to 
     end

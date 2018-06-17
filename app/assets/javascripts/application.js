@@ -11,7 +11,8 @@
 // about supported directives.
 //= require jquery3
 //= require popper
-//= require bootstrap
+// = require bootstrap
+//= require material
 //= require rails-ujs
 //= require activestorage
 //= require anime.min

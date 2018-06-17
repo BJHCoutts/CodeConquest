@@ -7,8 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-		<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-		<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
   </head>
 
   <body>
@@ -44,9 +43,9 @@
               </li>
             <% end %>
 						<% if current_user.admin %>
-							 <li class="nav-item">
-                <%= link_to new_drill_group_path, class: 'nav-link' do %>
-                  <i class="fas fa-plus"></i> New Drill Group
+							<li class="nav-item">
+                <%= link_to drill_groups_path, class: 'nav-link' do %>
+                  <i class="fas fa-plus"></i> Drill Groups
                 <% end %>
               </li>
 						<% end %>

@@ -1,30 +1,24 @@
-<h1><%= @drill.title %></h1>
-
-<p><%= @drill.description %></p>
-
-<% options = ("a".."z").to_a %>
-<% @drill.questions.each_with_index do |q, index| %>
-  <div>
-    <%= index + 1%>. <%= q["title"] %>
-    <% q["options"].each_with_index do |o, index| %>
-      <p><%= options[index]%>) <%=o%></p>
-    <% end %>
-  </div>
-<% end %>
-
-
-<% if can?(:manage, @drill) %>
-
-  <%= link_to "Edit", edit_drill_path(@drill), class: "btn btn-primary" %>
-
-  <%= link_to(
-    'Delete',
-    drill_path(@drill),
-    method: :delete,
-    data:{
-    confirm: 'really delete?'
-    },
-    class: "btn btn-danger"
-    )
-  %>
-<% end %>
+<div class="container mt-4">
+	
+	<h1 class="display-4"><%= @drill.title %></h1>
+  <p class="lead"><%= @drill.description %></p>
+  
+	<hr class="my-4">
+	<%=form_tag drill_transcripts_path(@drill), :method => :post do %>
+		<% @questions.each_with_index  do |q, index|%>
+			<div class="form-group">
+				<div class="mb-3">
+				<p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+				</div>
+				<% q.options.each do |option| %>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
+						<label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+					</div>
+				<% end %>
+			<div>
+			<hr class="my-4">
+		<% end %>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	<% end %>
+</div>

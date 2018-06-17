@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_214732) do
+ActiveRecord::Schema.define(version: 2018_06_17_110341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,22 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
   create_table "drills", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.json "questions"
-    t.string "answers", array: true
     t.integer "taken"
     t.bigint "drill_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["drill_group_id"], name: "index_drills_on_drill_group_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "body"
+    t.string "answer"
+    t.string "options", array: true
+    t.integer "point"
+    t.bigint "drill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drill_id"], name: "index_questions_on_drill_id"
   end
 
   create_table "takes", force: :cascade do |t|
@@ -47,6 +56,18 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
     t.index ["user_id"], name: "index_takes_on_user_id"
   end
 
+  create_table "transcripts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "drill_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "correct_questions", array: true
+    t.integer "wrong_questions", array: true
+    t.index ["drill_id"], name: "index_transcripts_on_drill_id"
+    t.index ["user_id"], name: "index_transcripts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "last_name"
     t.string "first_name"
@@ -56,11 +77,14 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
     t.boolean "approved_student"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "score"
+    t.integer "score"
   end
 
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
+  add_foreign_key "questions", "drills"
   add_foreign_key "takes", "drill_groups"
   add_foreign_key "takes", "users"
+  add_foreign_key "transcripts", "drills"
+  add_foreign_key "transcripts", "users"
 end
