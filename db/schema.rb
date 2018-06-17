@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_104502) do
+ActiveRecord::Schema.define(version: 2018_06_17_110341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 2018_06_17_104502) do
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "correct_questions", array: true
+    t.integer "wrong_questions", array: true
     t.index ["drill_id"], name: "index_transcripts_on_drill_id"
     t.index ["user_id"], name: "index_transcripts_on_user_id"
   end
