@@ -18,7 +18,9 @@ class UsersController < ApplicationController
     #we might change this controller later and add more features
   end
 
-
+  def update_score
+    user.score = @correct_questions
+  end
 
   private
   def user_params

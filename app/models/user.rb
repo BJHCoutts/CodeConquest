@@ -1,14 +1,8 @@
 class User < ApplicationRecord
   has_secure_password()
-  after_initialize :init
 
   has_many :drill_groups, dependent: :nullify
   has_many :taken_questions, through: :transcripts, source: :question
-
-
-  def init
-    self.score  ||= 0.0           #will set the default value only if it's nil
-  end
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
