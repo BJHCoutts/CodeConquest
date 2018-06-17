@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :drills, only: [:new, :show, :create, :edit, :destroy] do
       resources :questions, only: [:new, :create, :edit, :destroy] do
       end
-      resources :transcripts, only: [:create]
+      resources :transcripts, only: [:create, :show]
     end
   end
 end
