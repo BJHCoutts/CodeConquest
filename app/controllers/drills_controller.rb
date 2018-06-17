@@ -13,10 +13,8 @@ class DrillsController < ApplicationController
     @drill.drill_group = @drill_group
 
     if @drill.save 
-        drill_params[:answers].each do |answer|
-        @drill.answers.create(answer)
+      redirect_to drills_path(@drill)
     end
-    redirect_to drills_path(@drill)
     else
       render :new
     end
@@ -31,7 +29,6 @@ class DrillsController < ApplicationController
 
   def destroy
     @drill.destroy
-
     redirect_to drills_path
   end
 
