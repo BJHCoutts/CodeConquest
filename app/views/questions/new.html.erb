@@ -1,26 +1,52 @@
-<div class="container">
-  <h1>Sign Up Page - New User</h1>
-  <%= simple_form_for @user, :from => { class: 'input-group' }  do |f| %>
+<div class="container mt-4">
+  <h1 class="display-4" style="font-size:5vw" >New Question on <%=@drill.title%></h1>
+  <%=form_tag new_drill_question_path(@drill), :method => :post do %>
     <div class="form-group">
-      <%= f.input :first_name, input_html: { class: 'form-control' },  required: true %>
+      <div class="floating-label">
+        <label for="question-body">What is your question?</label>
+        <input aria-describedby="question-body" class="form-control" id="question-body" type="text">
+        <small id="question-body-help" class="form-text text-muted">Eg. Which one is correct the method to convert string <code> "1" </code> to number <code> 1 </code>?</small>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.input :last_name, input_html: { class: 'form-control' },  required: true %>
+    <div class="form-column">
+    <label for="AnswerRadioButton" >Answer</label>
+      <% ('A'..'E').to_a.each_with_index do |option, index| %>
+        <div class="col-md mb-3 pl-2">
+        
+          <div class="input-group">
+            <div class="input-group-prepend mr-0">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="option-radio-<%= index %>" name="answer" class="custom-control-input" value="<%=index%>">
+                <label class="custom-control-label" for="option-radio-<%= index %>"></label>
+              </div>
+            </div>
+            <input type="text" class="form-control is-valid" style="font-size:2vw" id="Option-<%=option%>" placeholder="Option <%=option%>" aria-describedby="Option-<%=option%>" required>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="form-group">
-      <%= f.input :email, input_html: { class: 'form-control' },  required: true %>
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <%= f.input :password, input_html: { class: 'form-control' },  required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.input :password_confirmation, input_html: { class: 'form-control' },  required: true %>
-    </div>
-    <input class="btn btn-primary" type="submit" value="Submit">
+    <button type="submit" class="btn btn-success new-question mt-4">Create New Question</button>
   <% end %>
+
+
+
 </div>
+  <script>
+    let index = 0;
+    $('button.new-question').click(function (e) {
+    
+    e.preventDefault();
+		$(this).closest('.card-body')
+			.find('.idea-content-wrapper')
+			.toggleClass('idea-content-hide');
 
-
-
-
+			let CSStransforms = anime({
+				targets: this,
+  			duration: 1000,
+				scale: 0,
+        easing: "linear"
+			});
+      
+    $( "button.new-question" ).submit();
+	})
+  </script>
