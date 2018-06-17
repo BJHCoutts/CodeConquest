@@ -23,16 +23,13 @@ class DrillsController < ApplicationController
   end
 
   def show
-    # @drill = Drill.find params[:id]
     @questions = @drill.questions
   end
 
   def edit
-    # @drill = Drill.find params[:id]
   end
 
   def destroy
-    # @drill = Drill.find(params[:id])
     @drill.destroy
 
     redirect_to drills_path
