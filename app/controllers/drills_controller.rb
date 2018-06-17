@@ -28,7 +28,7 @@ class DrillsController < ApplicationController
 
   def destroy
     @drill.destroy
-    redirect_to drills_path
+    redirect_to drill_group_path(@drill.drill_group)
   end
 
 
