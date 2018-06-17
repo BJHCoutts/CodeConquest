@@ -1,17 +1,26 @@
-<div style="color:black;">
-<h1>Sign Up Page - New User</h1>
+<div class="container">
+  <h1>Sign Up Page - New User</h1>
+  <%= simple_form_for @user, :from=> { class: 'input-group' }  do |f| %>
+    <div class="form-group">
+      <%= f.input :first_name, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :last_name, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :email, input_html: { class: 'form-control' },  required: true %>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <%= f.input :password, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :password_confirmation, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit">
+  <% end %>
+</div>
 
-<%= simple_form_for @user do |f| %>
-  <%= f.input :first_name, required: true%>
-  <%= f.input :last_name, required: true%>
-  <%= f.label :email %>
-  <%= f.email_field :email, required: true%>
-  <%= f.label :password %>
-  <%= f.password_field :password, required: true%>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, required: true%>
-  <%= f.submit "Sign in"%>
-<% end %>
 
 
 
