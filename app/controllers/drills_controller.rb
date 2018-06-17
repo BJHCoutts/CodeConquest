@@ -4,11 +4,14 @@ class DrillsController < ApplicationController
 
   def new
     @drill = Drill.new
+    @drill_group = DrillGroup.find(params[:drill_group_id])
   end
 
   def create
+    @drill_group = DrillGroup.find(params[:drill_group_id])
     @drill = Drill.new drill_params
-    debugger
+    @drill.drill_group = @drill_group
+
     if @drill.save 
         drill_params[:answers].each do |answer|
         @drill.answers.create(answer)

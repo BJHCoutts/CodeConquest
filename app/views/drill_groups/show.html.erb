@@ -8,6 +8,9 @@
     </p>
     <p class="lead">
       <%=@drill_group.difficulty%>
+      <a href="<%= new_drill_group_drill_path(@drill_group) %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+      New Drill
+    </a>
     </p>
     <hr class="my-4">
     <div class="accordion" id="accordionExample">
