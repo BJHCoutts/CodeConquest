@@ -1,9 +1,12 @@
+
 <%= form_for @drill do |f| %>
     <% if @drill.errors.present? %>
         <p>
             <%= @drill.errors.full_messages.join(', ') %>
         </p>
     <% end %>
+
+    
 
   <div>
     <%= f.label :title %>
@@ -13,21 +16,12 @@
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-  <div>
-    <div>
-      <%= f.label :questions %>
-      <%= f.text_field :questions %>
-    </div>
-    <div>
-      <%= f.label :answers %>
-      <br>
-      <% 5.times do %>
-        <%= f.check_box :answers%>
-        <%= f.text_field :answers %>
-        <br>
-      <% end %>
-    </div>
-    </div>
-  </div>
+    <%= f.fields_for :questions do |question_field|%>
+      <%= question_field.label :questions %>
+      <%= question_field.text_field '' %>
+      
+      <%= question_field.label :questions %>
+      <%= question_field.text_field '' %>
+    <% end %>
   <%= f.submit %>
 <% end %>

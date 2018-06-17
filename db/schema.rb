@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
   create_table "drills", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.json "questions"
+    t.json "questions", array: true
     t.string "answers", array: true
     t.integer "taken"
     t.bigint "drill_group_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_214732) do
     t.boolean "approved_student"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "score"
+    t.integer "score"
   end
 
   add_foreign_key "drill_groups", "users"

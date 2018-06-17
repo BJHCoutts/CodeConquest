@@ -20,4 +20,15 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path
     end
   end
+
+  private
+
+  def authorize_user!
+    unless can?(:manage, @drill)
+      flash[:alert] = "Access Denied"
+      # redirect_to 
+    end
+end
+
+
 end
