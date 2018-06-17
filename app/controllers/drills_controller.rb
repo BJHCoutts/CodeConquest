@@ -7,9 +7,9 @@ class DrillsController < ApplicationController
 
   def create
     @drill = Drill.new drill_params
-
-  if @drill.save 
-    drill_params[:answers].each do |answer|
+    debugger
+    if @drill.save 
+        drill_params[:answers].each do |answer|
         @drill.answers.create(answer)
     end
     redirect_to drills_path(@drill)
@@ -36,6 +36,6 @@ class DrillsController < ApplicationController
 
   private
   def drill_params
-      params.require(:drill).permit(:title, :description, :questions, :answers)
+      params.require(:drill).permit(:title, :description, :questions => [], :answers => [])
   end
 end

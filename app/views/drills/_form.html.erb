@@ -6,6 +6,8 @@
         </p>
     <% end %>
 
+    
+
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -14,24 +16,12 @@
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-  <div>
-    <div>
-      <%= f.label :questions %>
-      <%= f.text_field :questions %>
-
-      <%= f.label :questions %>
-      <%= f.text_field :questions %>
-    </div>
-    <div>
-      <%= f.label :answers %>
-      <br>
-      <%= f.text_field :answers, multiple: true %>
-       <%= f.label :answers %>
-      <%= f.text_field :answers, multiple: true %>
-       <%= f.label :answers %>
-      <%= f.text_field :answers, multiple: true %>
-    </div>
-    </div>
-  </div>
+    <%= f.fields_for :questions do |question_field|%>
+      <%= question_field.label :questions %>
+      <%= question_field.text_field '' %>
+      
+      <%= question_field.label :questions %>
+      <%= question_field.text_field '' %>
+    <% end %>
   <%= f.submit %>
 <% end %>
