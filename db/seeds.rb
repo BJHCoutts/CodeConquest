@@ -60,7 +60,7 @@ dgs = DrillGroup.all
   )
 end
 
-d = Drill.all
+drills = Drill.all
 
 200.times.each do
   options = [
@@ -76,23 +76,28 @@ d = Drill.all
     options: options,
     answer: options.sample,
     point: (1..50).to_a.sample,
-    drill: d.sample
+    drill: drills.sample
   )
-
-  users.shuffle[0..2].each do |user|
-    Transcript.create question: q, user: user, score:  (1..200).to_a.sample
-  end
 end
 
+drills.each do |drill|
+  users.shuffle[0..2].each do |user|
+    questions = drill.questions.shuffle.each_slice(2).to_a
+    Transcript.create(
+      user: user, 
+      drill: drill, 
+      score:  (1..200).to_a.sample, 
+      correct_questions: questions[0], 
+      wrong_questions: questions[1]
+    ) 
+  end
+end
 q = Question.all
 t = Transcript.all
 
-
-
-
 puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 
-puts Cowsay.say "Created #{d.count} drills", :daemon
+puts Cowsay.say "Created #{drills.count} drills", :daemon
 
 puts Cowsay.say "Created #{q.count} questions", :daemon
 
