@@ -2,19 +2,29 @@
 
 <p><%= @drill.description %></p>
 
+<% options = ("a".."z").to_a %>
+<% @drill.questions.each_with_index do |q, index| %>
+  <div>
+    <%= index + 1%>. <%= q["title"] %>
+    <% q["options"].each_with_index do |o, index| %>
+      <p><%= options[index]%>) <%=o%></p>
+    <% end %>
+  </div>
+<% end %>
+
 
 <% if can?(:manage, @drill) %>
 
-    <%= link_to "Edit", edit_drill_path(@drill), class: "btn btn-primary" %>
+  <%= link_to "Edit", edit_drill_path(@drill), class: "btn btn-primary" %>
 
-    <%= link_to(
-       'Delete',
-        drill_path(@drill),
-        method: :delete,
-        data:{
-        confirm: 'really delete?'
-        },
-        class: "btn btn-danger"
-        )
-    %>
+  <%= link_to(
+    'Delete',
+    drill_path(@drill),
+    method: :delete,
+    data:{
+    confirm: 'really delete?'
+    },
+    class: "btn btn-danger"
+    )
+  %>
 <% end %>

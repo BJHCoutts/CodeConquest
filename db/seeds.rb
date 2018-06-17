@@ -57,15 +57,16 @@ dgs = DrillGroup.all
     question = Faker::BackToTheFuture.quote
     
     questions << {
-      question => {
-        "a"=> Faker::BackToTheFuture.character,
-        "b"=> Faker::Artist.name,
-        "c"=> Faker::Beer.hop,
-        "d"=> Faker::Beer.malts,
-        "e"=> Faker::Beer.name,
-      }
+      title: question,
+      options: [
+        Faker::BackToTheFuture.character,
+        Faker::Artist.name,
+        Faker::Beer.hop,
+        Faker::Beer.malts,
+        Faker::Beer.name,
+      ]
     }
-    answers << ["a","b","c","d","e"].sample
+    answers << ["0","1","2","3","4"].sample
   end
   d = Drill.create(
       title: Faker::Job.key_skill,
