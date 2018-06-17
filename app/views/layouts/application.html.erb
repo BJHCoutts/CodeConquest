@@ -8,9 +8,18 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
-  </head>
 
+  </head>
   <body>
+    <% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    </div>
+  <% end %>
+<% end %>
+
   <nav class="navbar  navbar-expand-sm navbar-dark bg-dark ">
 		<div class="container">
 
@@ -34,20 +43,20 @@
 							<i class="fas fa-home"></i> Home
 						<% end %>
 					</li>
-					<% if user_signed_in? %>
+					<% if current_user.approved%>
 						<li class="nav-item">
               <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
                 <i class="fas fa-plus"></i> Profile
               <% end %>
             </li>						
-            <% if current_user.approved_student%>
+            <% if current_user.admin%>
              <li class="nav-item">
                 <%= link_to drill_groups_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> New Post
                 <% end %>
               </li>
             <% end %>
-						<% if current_user.admin %>
+						<% if current_user.approved %>
 							<li class="nav-item">
                 <%= link_to drill_groups_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> Drill Groups
