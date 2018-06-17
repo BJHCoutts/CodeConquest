@@ -17,9 +17,8 @@ class UsersController < ApplicationController
     else
       flash[:alert] = @user.errors.full_messages.join(", ")
     end
+    redirect_to edit_user_path
   end
-
-
 
   def create
     @user = User.new user_params
