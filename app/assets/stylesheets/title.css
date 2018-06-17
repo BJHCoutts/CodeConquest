@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Righteous");
+
+body,
+html {
+  height: 100%;
+}
+
+.parallax {
+  background-image: url("Conquestbg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.font {
+  font-family: "Righteous", cursive;
+}
+
+.title {
+  margin: 6rem;
+  text-align: center;
+  font-size: 5rem;
+  color: whitesmoke;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
+.buttons {
+  margin: 4rem 0rem 8rem 0rem;
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-around;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
