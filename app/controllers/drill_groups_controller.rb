@@ -41,7 +41,7 @@ class DrillGroupsController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:mange, @drill_group)
+    unless can?(:manage, @drill_group)
       flash[:alert] = "Access Denied"
       # redirect_to 
     end
