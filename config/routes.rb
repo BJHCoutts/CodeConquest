@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   get '/' => 'welcome#index', as: 'root'
   get '/leaderboard' => 'users#leaderboard' #we might change this route later and add more features
-  resources :users, only: [:new, :create] 
+  resources :users, only: [:new, :create, :edit, :update] do 
+    resource :password, only: [:edit, :update]
+  end
   resource :session, only: [:new, :destroy, :create]
   resources :drill_groups, shallow:true do
     resources :drills, only: [:new, :show, :create, :edit, :destroy] do

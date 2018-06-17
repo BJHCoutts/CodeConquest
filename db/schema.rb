@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_110341) do
     t.boolean "approved_student"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "score", default: 0
+    t.integer "score"
   end
 
   add_foreign_key "drill_groups", "users"
