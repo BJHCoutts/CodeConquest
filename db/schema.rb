@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(version: 2018_06_17_110341) do
     t.string "first_name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "admin"
-    t.boolean "approved_student"
+    t.boolean "admin", default: false
+    t.boolean "approved_student", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "score"
+    t.integer "score", default: 0
   end
 
   add_foreign_key "drill_groups", "users"
