@@ -3,8 +3,8 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
     create_table :questions do |t|
       t.string :body
       t.string :answer
-      t.string :options
-      t.string :point
+      t.string :options, array: true
+      t.integer :point
       t.belongs_to :drill, foreign_key: true
 
       t.timestamps

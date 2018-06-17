@@ -37,7 +37,7 @@ puts Cowsay.say "Created #{approved_students.count} approved studnets", :tux
 puts Cowsay.say "Created #{not_approved_students.count} not approved students", :tux
 
  
-3.times.each do
+10.times.each do
   dg = DrillGroup.create(
       title: Faker::Simpsons.quote,
       description: Faker::Hacker.say_something_smart,
@@ -50,38 +50,43 @@ end
 
 dgs = DrillGroup.all
 
-100.times.each do
-  questions = []
-  answers = []
-  10.times.each do 
-    question = Faker::BackToTheFuture.quote
-    
-    questions << {
-      title: question,
-      options: [
-        Faker::BackToTheFuture.character,
-        Faker::Artist.name,
-        Faker::Beer.hop,
-        Faker::Beer.malts,
-        Faker::Beer.name,
-      ]
-    }
-    answers << ["0","1","2","3","4"].sample
-  end
+20.times.each do
   d = Drill.create(
-      title: Faker::Job.key_skill,
-      description: Faker::MostInterestingManInTheWorld.quote,
-      questions: questions,
-      answers: answers,
-      drill_group: dgs.sample
+    title: Faker::Job.key_skill,
+    description: Faker::MostInterestingManInTheWorld.quote,
+    drill_group: dgs.sample
   )
 end
 
-
 d = Drill.all
+
+200.times.each do
+  options = [
+    Faker::BackToTheFuture.character,
+    Faker::Artist.name,
+    Faker::Beer.hop,
+    Faker::Beer.malts,
+    Faker::Beer.name
+  ]
+
+  q = Question.create(
+    body: Faker::BackToTheFuture.quote,
+    options: options,
+    answer: options.sample,
+    point: (1..50).to_a.sample,
+    drill: d.sample
+  )
+end
+
+q = Question.all
+
+
+
 
 puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 
 puts Cowsay.say "Created #{d.count} drills", :daemon
+
+puts Cowsay.say "Created #{q.count} questions", :daemon
 
 puts "Login with #{admin_user.email} and password of #{PASSWORD}"

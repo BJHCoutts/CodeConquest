@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Sign Up Page - New User</h1>
+  <%= simple_form_for @user, :from => { class: 'input-group' }  do |f| %>
+    <div class="form-group">
+      <%= f.input :first_name, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :last_name, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :email, input_html: { class: 'form-control' },  required: true %>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <%= f.input :password, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input :password_confirmation, input_html: { class: 'form-control' },  required: true %>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit">
+  <% end %>
+</div>
+
+
+
+
