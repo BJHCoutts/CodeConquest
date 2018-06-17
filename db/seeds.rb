@@ -46,22 +46,41 @@ puts Cowsay.say "Created #{not_approved_students.count} not approved students", 
   )
 end
 
+
+
 dgs = DrillGroup.all
-10.times.each do
+
+100.times.each do
+  questions = []
+  answers = []
+  10.times.each do 
+    question = Faker::BackToTheFuture.quote
+    
+    questions << {
+      title: question,
+      options: [
+        Faker::BackToTheFuture.character,
+        Faker::Artist.name,
+        Faker::Beer.hop,
+        Faker::Beer.malts,
+        Faker::Beer.name,
+      ]
+    }
+    answers << ["0","1","2","3","4"].sample
+  end
   d = Drill.create(
       title: Faker::Job.key_skill,
       description: Faker::MostInterestingManInTheWorld.quote,
-      questions: {"This question's answer is a": {"a": "this is the a answer", "b": "this is the b answer", "c": "this is the c answer", "d": "this is the d answer"}},
-      answers:["a"],
+      questions: questions,
+      answers: answers,
       drill_group: dgs.sample
   )
 end
 
-dg = DrillGroup.all
 
 d = Drill.all
 
-puts Cowsay.say "Created #{dg.count} drill groups", :frogs
+puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 
 puts Cowsay.say "Created #{d.count} drills", :daemon
 
