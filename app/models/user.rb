@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password()
 
   has_many :drill_groups, dependent: :nullify
+  has_many :taken_questions, through: :transcripts, source: :question
 
 
  
