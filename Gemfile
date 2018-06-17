@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 4.1.1'
+gem 'material-sass', '~> 4.1.1'
 gem 'jquery-rails'
 
 # Use ActiveStorage variant
@@ -39,6 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan', '~> 2.0'
 
 gem 'simple_form'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
