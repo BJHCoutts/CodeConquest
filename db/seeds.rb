@@ -58,6 +58,10 @@ dgs = DrillGroup.all
     description: Faker::MostInterestingManInTheWorld.quote,
     drill_group: dgs.sample
   )
+
+  users.shuffle[0..2].each do |user|
+    Transcript.create user: user, drill: d, score:  (1..200).to_a.sample
+  end
 end
 
 d = Drill.all
@@ -78,17 +82,10 @@ d = Drill.all
     point: (1..50).to_a.sample,
     drill: d.sample
   )
-
-  users.shuffle[0..2].each do |user|
-    Transcript.create question: q, user: user, score:  (1..200).to_a.sample
-  end
 end
 
 q = Question.all
 t = Transcript.all
-
-
-
 
 puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_093033) do
+ActiveRecord::Schema.define(version: 2018_06_17_104502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,12 +57,12 @@ ActiveRecord::Schema.define(version: 2018_06_17_093033) do
   end
 
   create_table "transcripts", force: :cascade do |t|
-    t.bigint "question_id"
     t.bigint "user_id"
+    t.bigint "drill_id"
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_transcripts_on_question_id"
+    t.index ["drill_id"], name: "index_transcripts_on_drill_id"
     t.index ["user_id"], name: "index_transcripts_on_user_id"
   end
 
@@ -83,6 +83,6 @@ ActiveRecord::Schema.define(version: 2018_06_17_093033) do
   add_foreign_key "questions", "drills"
   add_foreign_key "takes", "drill_groups"
   add_foreign_key "takes", "users"
-  add_foreign_key "transcripts", "questions"
+  add_foreign_key "transcripts", "drills"
   add_foreign_key "transcripts", "users"
 end

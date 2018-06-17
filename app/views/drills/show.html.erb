@@ -1,19 +1,26 @@
-<h1><%= @drill.title %></h1>
-
-<p><%= @drill.description %></p>
-
-<div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox100" checked="checked">
-    <label class="form-check-label" for="checkbox100">Classic checkbox</label>
-</div>
-<% @drill.questions.each  do |q|%>
-  <%= q.body %>
-  <%= q.options %>
-<% end %>
-
-<div class="form-check">
-    <input type="checkbox" class="filled-in form-check-input" id="checkbox101" checked="checked">
-    <label class="form-check-label" for="checkbox101">Filled-in checkbox</label>
+<div class="container mt-4">
+	
+	<h1 class="display-4"><%= @drill.title %></h1>
+  <p class="lead"><%= @drill.description %></p>
+  
+	<hr class="my-4">
+	<%=form_tag drill_transcripts_path(@drill), :method => :post do %>
+		<% @questions.each_with_index  do |q, index|%>
+			<div class="form-group">
+				<div class="mb-3">
+				<p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+				</div>
+				<% q.options.each do |option| %>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
+						<label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+					</div>
+				<% end %>
+			<div>
+			<hr class="my-4">
+		<% end %>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	<% end %>
 </div>
 
 
