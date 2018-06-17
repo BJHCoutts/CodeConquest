@@ -13,7 +13,7 @@ class DrillsController < ApplicationController
     @drill.drill_group = @drill_group
 
     if @drill.save 
-      redirect_to drills_path(@drill)
+      redirect_to drill_path(@drill)
     else
       render :new
     end
