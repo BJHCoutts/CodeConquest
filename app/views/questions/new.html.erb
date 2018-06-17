@@ -4,7 +4,7 @@
     <div class="form-group">
       <div class="floating-label">
         <label for="question-body">What is your question?</label>
-        <input aria-describedby="question-body" class="form-control" id="question-body" type="text">
+        <input aria-describedby="question-body" class="form-control" id="question-body" type="text" name="body">
         <small id="question-body-help" class="form-text text-muted">Eg. Which one is correct the method to convert string <code> "1" </code> to number <code> 1 </code>?</small>
       </div>
     </div>
@@ -12,7 +12,6 @@
     <label for="AnswerRadioButton" >Answer</label>
       <% ('A'..'E').to_a.each_with_index do |option, index| %>
         <div class="col-md mb-3 pl-2">
-        
           <div class="input-group">
             <div class="input-group-prepend mr-0">
               <div class="custom-control custom-radio">
@@ -33,20 +32,19 @@
 </div>
   <script>
     let index = 0;
-    $('button.new-question').click(function (e) {
+    $('button.new-question').click( async function (e) {
     
     e.preventDefault();
-		$(this).closest('.card-body')
-			.find('.idea-content-wrapper')
-			.toggleClass('idea-content-hide');
-
-			let CSStransforms = anime({
-				targets: this,
-  			duration: 1000,
-				scale: 0,
+    try {
+      let CSStransforms = await anime({
+        targets: this,
+        duration: 1000,
+        scale: 0,
         easing: "linear"
-			});
-      
-    $( "button.new-question" ).submit();
+      })
+      await $(this).submit();
+    } catch(error) {
+      throw new Error(error);
+    }
 	})
   </script>
