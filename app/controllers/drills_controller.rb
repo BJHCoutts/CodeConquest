@@ -14,14 +14,13 @@ class DrillsController < ApplicationController
 
     if @drill.save 
       redirect_to drills_path(@drill)
-    end
     else
       render :new
     end
   end
 
   def show
-    @questions = @drill.questions
+    @questions = @drill.question
   end
 
   def edit
@@ -37,6 +36,7 @@ class DrillsController < ApplicationController
   def find_drill
     @drill = Drill.find params[:id]
   end
+
   def drill_params
       params.require(:drill).permit(:title, :description, :questions => [], :answers => [])
   end

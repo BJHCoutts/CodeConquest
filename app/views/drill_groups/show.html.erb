@@ -33,6 +33,19 @@
                   <%=drill.description%>
                 </p>
                 <a class="btn btn-primary" href="<%=drill_path(drill)%>" role="button">Take this drill</a>
+                <% if can?(:manage, drill) %>
+                <%= link_to "Edit", edit_drill_path(drill), class: "btn btn-info" %>
+                  <%= link_to(
+                    'Delete',
+                    drill_path(drill),
+                    method: :delete,
+                    data:{
+                    confirm: 'Do you wanna delete this drill?'
+                    },
+                    class: "btn btn-danger"
+                    )
+                  %>
+                <% end %>
               </div>
             </div>
           </div>
