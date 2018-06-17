@@ -2,6 +2,7 @@ PASSWORD = "supersecret"
 
 User.destroy_all
 DrillGroup.destroy_all
+Drill.destroy_all
 
 admin_user = User.create(
   first_name: "Jon",
@@ -36,7 +37,7 @@ puts Cowsay.say "Created #{approved_students.count} approved studnets", :tux
 puts Cowsay.say "Created #{not_approved_students.count} not approved students", :tux
 
  
-10.times.each do
+3.times.each do
   dg = DrillGroup.create(
       title: Faker::Simpsons.quote,
       description: Faker::Hacker.say_something_smart,
@@ -45,11 +46,23 @@ puts Cowsay.say "Created #{not_approved_students.count} not approved students", 
   )
 end
 
-
+dgs = DrillGroup.all
+10.times.each do
+  d = Drill.create(
+      title: Faker::Job.key_skill,
+      description: Faker::MostInterestingManInTheWorld.quote,
+      questions: {"This question's answer is a": {"a": "this is the a answer", "b": "this is the b answer", "c": "this is the c answer", "d": "this is the d answer"}},
+      answers:["a"],
+      drill_group: dgs.sample
+  )
+end
 
 dg = DrillGroup.all
 
+d = Drill.all
+
 puts Cowsay.say "Created #{dg.count} drill groups", :frogs
 
+puts Cowsay.say "Created #{d.count} drills", :daemon
 
 puts "Login with #{admin_user.email} and password of #{PASSWORD}"
