@@ -1,3 +1,4 @@
+
 <%= form_for @drill do |f| %>
     <% if @drill.errors.present? %>
         <p>
@@ -17,15 +18,18 @@
     <div>
       <%= f.label :questions %>
       <%= f.text_field :questions %>
+
+      <%= f.label :questions %>
+      <%= f.text_field :questions %>
     </div>
     <div>
       <%= f.label :answers %>
       <br>
-      <% 5.times do %>
-        <%= f.check_box :answers%>
-        <%= f.text_field :answers %>
-        <br>
-      <% end %>
+      <%= f.text_field :answers, multiple: true %>
+       <%= f.label :answers %>
+      <%= f.text_field :answers, multiple: true %>
+       <%= f.label :answers %>
+      <%= f.text_field :answers, multiple: true %>
     </div>
     </div>
   </div>

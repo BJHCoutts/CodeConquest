@@ -6,12 +6,9 @@ class DrillsController < ApplicationController
     end
 
     def create
-        @drill = Drill.new drill_params
-
+        @drill = Drill.create(drill_params);
+        debugger
         if @drill.save 
-            drill_params[:answers].each do |answer|
-                @drill.answers.create(answer)
-            end
             redirect_to drills_path(@drill)
         else
             render :new
