@@ -4,11 +4,13 @@ class DrillGroupsController < ApplicationController
 
   def new
     @drill_group = DrillGroup.new
+    @difficulties = ["Beginner", "Intermediate", "Advanced"]
   end
 
   def create
     @drill_group = DrillGroup.new(drill_group_params)
     @drill_group.user = current_user
+    
     if @drill_group.save
       redirect_to drill_group_path(@drill_group)
     else

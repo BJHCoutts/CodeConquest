@@ -4,5 +4,5 @@ class DrillGroup < ApplicationRecord
 
 
   validates :title, :description, presence: true
-  validates :difficulty, inclusion: { in: ["Beginner", "Intermediate", "Advanced"] }
+  # validates :difficulty, inclusion: { in: ["Beginner", "Intermediate", "Advanced"] }
 end

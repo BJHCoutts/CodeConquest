@@ -1,4 +1,10 @@
 <h1>New Drill</h1>
-<% if can? :manage, @drill_group %>  
-<%= render "form" %>
- <% end %>
+<% if can? :manage, @drill_group %>   
+  <%= simple_form_for @drill, :from => { class: 'input-group' }  do |f| %>
+     <div class="form-group">
+      <div class="floating-label">
+        <%= f.input :title, input_html: { class: 'form-control' },  required: true %>
+      </div>
+    </div>
+  <% end %> 
+<% end %>
