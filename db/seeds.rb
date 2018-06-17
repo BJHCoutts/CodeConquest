@@ -3,6 +3,8 @@ PASSWORD = "supersecret"
 User.destroy_all
 DrillGroup.destroy_all
 Drill.destroy_all
+Question.destroy_all
+Transcript.destroy_all
 
 admin_user = User.create(
   first_name: "Jon",
@@ -12,7 +14,7 @@ admin_user = User.create(
   admin: true,
   approved_student: false
 )
-10.times.each do
+30.times.each do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
 
@@ -76,9 +78,14 @@ d = Drill.all
     point: (1..50).to_a.sample,
     drill: d.sample
   )
+
+  users.shuffle[0..2].each do |user|
+    Transcript.create question: q, user: user, score:  (1..200).to_a.sample
+  end
 end
 
 q = Question.all
+t = Transcript.all
 
 
 
@@ -88,5 +95,7 @@ puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 puts Cowsay.say "Created #{d.count} drills", :daemon
 
 puts Cowsay.say "Created #{q.count} questions", :daemon
+
+puts Cowsay.say "Created #{t.count} transcripts", :daemon
 
 puts "Login with #{admin_user.email} and password of #{PASSWORD}"
