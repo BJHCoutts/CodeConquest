@@ -1,9 +1,11 @@
-<div class="container">
+<div class="container mt-4">
   <ul class="list-group">
     <% @drill_groups.each do |drill_group| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="<%=drill_group_path(drill_group)%>" 
+         class="list-group-item list-group-item-action flex-column align-items-start"
+      >
         <%= drill_group.title %>
-        <span class="badge badge-primary badge-pill">14</span>
+        <span class="badge badge-primary badge-pill"><%= drill_group.drills.count %></span>
       </li>
     <% end %>
   </ul>

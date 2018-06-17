@@ -1,9 +1,38 @@
-
 <div class="container mt-4">
   <div class="jumbotron">
-    <h1 class="display-4"><%=@drill_group.title%></h1>
-    <p class="lead"><%=@drill_group.description%></p>
-    <p class="lead"><%=@drill_group.difficulty%></p>
+    <h1 class="display-4">
+      <%=@drill_group.title%>
+    </h1>
+    <p class="lead">
+      <%=@drill_group.description%>
+    </p>
+    <p class="lead">
+      <%=@drill_group.difficulty%>
+    </p>
     <hr class="my-4">
+    <div class="accordion" id="accordionExample">
+      <% @drill_group.drills.each do |drill|%>
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <div class="d-flex">
+              <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapse-drill-<%=drill.id%>" aria-expanded="true"
+                aria-controls="collapseOne">
+                <%=drill.title%>
+              </button>
+            </div>
+          </div>
+
+          <div id="collapse-drill-<%=drill.id%>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <p>
+                <%=drill.description%>
+              </p>
+              <a class="btn btn-primary" href="<%=drill_path(drill)%>" role="button">Take this drill</a>
+            </div>
+
+          </div>
+        </div>
+        <% end %>
+    </div>
   </div>
 </div>
