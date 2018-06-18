@@ -12,7 +12,7 @@ admin_user = User.create(
   email: "js@winterfell.gov",
   password: PASSWORD,
   admin: true,
-  approved_student: false
+  is_approved: false
 )
 30.times.each do
   first_name = Faker::Name.first_name
@@ -24,15 +24,14 @@ admin_user = User.create(
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
     password: PASSWORD,
     admin: false,
-    approved_student: [true, false].sample,
-    score: 0
+    is_approved: [true, false].sample,
   )
 end
 
 users = User.all
 admins = users.where("admin = true")
-approved_students = users.where("approved_student = false")
-not_approved_students = users.where("approved_student = true")
+approved_students = users.where(is_approved: false)
+not_approved_students = users.where(is_approved: true)
 
 puts Cowsay.say "Created total #{users.count} users", :tux
 puts Cowsay.say "Created #{admins.count} admin users", :tux
