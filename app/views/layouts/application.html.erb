@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+<<<<<<< HEAD
     <title>Codeconquest</title>
+=======
+    <title>Code Conquest</title>
+>>>>>>> 511133d9885d38b7cc5f9cf4153ea483ef6bac26
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
@@ -13,7 +17,7 @@
   </head>
 
   <body>
-  <nav class="navbar  navbar-expand-sm navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
 		<div class="container">
 
 			<svg id="logo-svg" viewBox="0 0 240.4 240.4" width="50" height="50" class="d-inline-block align-top">
@@ -21,7 +25,6 @@
 			</svg>
 			<% if user_signed_in? %>
 				<a class="navbar-brand font" href="/">Welcome! <%= current_user.first_name %></a>
-				<a class="navbar-brand font" href="/">Your Score is! <%= current_user.score %></a>
 			<% else %>
 				<a class="navbar-brand font" href="/">Code Conquest</a>
 			<% end %>

@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   def create
     drill = Drill.find(params[:drill_id])
+    # byebug
     question = Question.create(question_params)
     question.drill = drill
     if question.save
