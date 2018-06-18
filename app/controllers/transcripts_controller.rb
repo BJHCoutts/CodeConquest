@@ -7,22 +7,19 @@ class TranscriptsController < ApplicationController
     
     questions.each_with_index do |q, index|
     
-      record 
-      if taken == 0
-        record = Record.create(user: current_user, question: q, student_answer: index)
-      else
-        record = Record.where(user_id: current_user, question_id: q)
-      
-
       if q.answer == params["#{index}"]
-        record.correct_time += 1
         total_score += q.point
       else
-        record.incorrect_time += 1
+        
       end
+      is_correct = (q.answer == params["#{index}"])
+
+      Record.create(user: current_user, question: q, is_correct: is_correct)
       
     end
-    transcript = Transcript.create(user: current_user, drill: drill, score: total_score)
+    total_score = questions.sum(:point)
+    
+    transcript = Transcript.create(user: current_user, drill: drill, score: full_points)
     
     
     if transcript.save

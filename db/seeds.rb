@@ -87,7 +87,8 @@ drills.each do |drill|
     Transcript.create(
       user: user, 
       drill: drill, 
-      score: (1..200).to_a.sample
+      student_score: (1..100).to_a.sample,
+      full_mark: (100..120).to_a.sample
     )
     qs.each do |q|
       Record.create(
