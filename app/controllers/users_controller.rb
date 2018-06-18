@@ -41,8 +41,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:approved] == "false"
-      @users = User.where(approved: false)
+    if params[:is_approved] == "false"
+      @users = User.where(is_approved: false)
     else
       @users = User.all.order(id: :desc)
     end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def update_approved
     @user = User.find(params[:id])
-    @user.approved = !@user.approved
+    @user.is_approved = !@user.is_approved
     @user.save
     redirect_to admin_dashboard_index_path
   end

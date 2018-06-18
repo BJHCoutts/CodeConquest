@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <% if !current_user.approved_student %>
+  <% if !current_user.is_approved && !current_user.admin%>
     <p class="lead">
       You are not approved yet. We apologize for the inconvenience.  
     </p>
