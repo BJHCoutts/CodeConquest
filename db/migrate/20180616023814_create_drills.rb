@@ -3,7 +3,6 @@ class CreateDrills < ActiveRecord::Migration[5.2]
     create_table :drills do |t|
       t.string :title
       t.string :description
-      t.integer :taken
       t.belongs_to :drill_group, foreign_key: true
 
       t.timestamps
