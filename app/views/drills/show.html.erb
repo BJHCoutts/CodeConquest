@@ -19,6 +19,9 @@
 					</div>
 				<% end %>
 			<div>
+			<% if current_user.admin %>
+				<a class="btn btn-secondary mt-4" href="<%=edit_question_path(q) %>" role="button">Edit</a>
+			<% end %>
 			<hr class="my-4">
 		<% end %>
 		
