@@ -1,24 +1,47 @@
-# README
+# Code Conquest
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An app that users may sign in to so that they may take quizzes and improve their coding knowledge! Quizes come in three difficulties: easy medium and hard. It features user sign in authorization, as well as admin priviliages. Users may take quizzes and keep track of their scores, which they may compare their results to other users on a leaderboard. Admins may create, edit and delete tests.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* System dependencies
+## Prerequisites
 
-* Configuration
+Make a git clone of the repository.
 
-* Database creation
+Run the _bundle_ command in the terminal.
 
-* Database initialization
+Start the server with _rails s_.
 
-* How to run the test suite
+Log onto the server at **http://localhost:3000**.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running the tests
 
-* Deployment instructions
+Tests are not yet implimented.
 
-* ...
+## Built With
+
+Ruby on Rails version 5.2.
+
+Material Design by Google.
+
+## Versioning
+
+1.0 initial release.
+
+## Authors
+
+Sunny, Randel, Alex and Brian.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+Title page image credit goes to Crystal Core, from "Conquest - Hadrian's Divide".
+
+Title font is "Righteous" by Astigmatic of Principal design.
+
+Leaderboard image and font credit goes to Midway, from the Mortal Kombat franchise.
