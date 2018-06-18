@@ -1,16 +1,16 @@
 <div class="container mt-4">
   <h1 class="display-4" style="font-size:5vw">New Question on <%=@drill.title%></h1>
-  <%=form_tag drill_questions_path(@drill), :method => :post, :id => "question_form" do %>
+  <%=form_tag question_path(@question), :method => :patch, :id => "question_form" do %>
     <div class="form-group">
       <div class="floating-label">
         <label for="question-body">What is your question?</label>
-        <input aria-describedby="question-body" class="form-control" id="question-body" type="text" name="body">
+        <input aria-describedby="question-body" class="form-control" id="question-body" type="text" name="body" value = "<%=@question.body%>">
         <small id="question-body-help" class="form-text text-muted">Eg. Which one is correct the method to convert string <code> "1" </code> to number <code> 1 </code>?</small>
       </div>
     </div>
     <div class="form-column">
     <label for="AnswerRadioButton" >Answer</label>
-      <% ('A'..'E').to_a.each_with_index do |option, index| %>
+      <% @question.options.each_with_index do |option, index| %>
         <div class="col-md mb-3 pl-2">
           <div class="input-group">
             <div class="input-group-prepend mr-0">
@@ -19,12 +19,12 @@
                 <label class="custom-control-label" for="option-radio-<%= index %>"></label>
               </div>
             </div>
-            <input type="text" class="form-control is-valid" name="options[]" style="font-size:2vw" id="Option-<%=option%>" placeholder="Option <%=option%>" aria-describedby="Option-<%=option%>" required>
+            <input type="text" class="form-control is-valid" name="options[]" value="<%=option%>" style="font-size:2vw" id="Option-<%=option%>" placeholder="Option <%=option%>" aria-describedby="Option-<%=option%>" required>
           </div>
         </div>
       <% end %>
     </div>
-    <button type="submit" class="btn btn-secondary new-question mt-4">Create</button>
+    <button type="submit" class="btn btn-secondary new-question mt-4">Update</button>
   <% end %>
 </div>
 
@@ -37,7 +37,7 @@
 
     $("button.new-question")
       .html(
-        `Created? <i class="material-icons">
+        `Updated? <i class="material-icons">
           check_circle
         </i>`
       )

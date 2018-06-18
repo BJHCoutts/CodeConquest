@@ -16,7 +16,19 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    
+    @question = Question.find(params[:id])
+    @drill = @question.drill
+  end
+
+  def update
+    question = Question.find(params[:id])
+    drill = question.drill
+    if question.update(question_params)
+      redirect_to drill_path(drill)
+    else
+      render :edit
+    end
+
   end
   
   def destroy
