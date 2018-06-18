@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :authorize_user!, only: [:edit, :update]
 
   def new
@@ -8,6 +7,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize! :update, @user, :message => "Denied"  
   end
 
   def update
@@ -24,7 +24,8 @@ class UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Logged In!"
+      flash[:alert] = "Wait for account approval"
+      redirect_to root_path
     else
       render :new
     end
@@ -37,6 +38,21 @@ class UsersController < ApplicationController
 
   def update_score
     user.score = @correct_questions
+  end
+
+  def index
+    if params[:approved] == "false"
+      @users = User.where(approved: false)
+    else
+      @users = User.all.order(id: :desc)
+    end
+  end
+
+  def update_approved
+    @user = User.find(params[:id])
+    @user.approved = !@user.approved
+    @user.save
+    redirect_to admin_dashboard_index_path
   end
 
   private

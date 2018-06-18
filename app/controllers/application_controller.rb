@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+rescue_from CanCan::AccessDenied do |exception|
+  redirect_to root_path
+end
   private
   def user_signed_in?
     current_user.present?
@@ -24,11 +27,11 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize_user!
-    unless can?(:manage, @drill)
+    unless can?(:manage, current_user)
       flash[:alert] = "Access Denied"
-      # redirect_to 
+      redirect_to root_path
     end
-end
+  end
 
 
 end
