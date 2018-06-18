@@ -10,10 +10,9 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
-  </head>
 
+  </head>
   <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
 		<div class="container">
 
 			<svg id="logo-svg" viewBox="0 0 240.4 240.4" width="50" height="50" class="d-inline-block align-top">
@@ -43,29 +42,33 @@
 						<% end %>
 					</li>
 					<% if user_signed_in? %>
+					<% if current_user && current_user.approved%>
 						<li class="nav-item">
               <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
                 <i class="fas fa-plus"></i> Profile
               <% end %>
-            </li>						
-            <% if current_user.approved_student%>
+            </li>
+												
+            <% if current_user.admin%>
              <li class="nav-item">
                 <%= link_to drill_groups_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> New Post
                 <% end %>
               </li>
             <% end %>
-						<% if current_user.admin %>
+						<% if current_user && current_user.approved%>
 							<li class="nav-item">
                 <%= link_to drill_groups_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> Drill Groups
                 <% end %>
               </li>
+							<% if current_user.admin %>
 							<li class="nav-item">
                 <%= link_to admin_dashboard_index_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> Dashboard
                 <% end %>
-              </li>				
+              </li>	
+							<% end %>
 						<% end %>
 						<li class="nav-item">
 							<%= link_to session_path, method: :delete, class: 'nav-link' do %>

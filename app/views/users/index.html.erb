@@ -1,0 +1,11 @@
+<% if can? :manage, @drill_group %>
+<table>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %>
+        <td><%= user.approved %>
+        <td><%= link_to "Edit", update_approved_user_path(user.id) %>
+      </tr>
+    <% end %>
+</table>
+<% end %>
