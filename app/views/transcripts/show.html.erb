@@ -1,7 +1,7 @@
 <div class="container mt-4">
-	<h1 class="display-4">You got 
+	<h1 class="display-4">
     <span class="score-decoration">
-      <strong class="percentage-score">
+      <strong class="d-flex justify-content-center percentage-score">
       </strong>
     </span>
   </h1>
@@ -12,11 +12,22 @@
   </div>
   <p class="lead mb-2" ><i class="material-icons">details</i> Detail</p>
   <div class="d-flex flex-wrap">
-  <p class="lead pl-1">Your score : <%=@transcript.student_score%> </p>
-  <p class="lead pl-1">Max score : <%=@transcript.full_mark%></p>
+  <p class="lead pl-1">Your score : 
+    <span class="score-decoration">
+      <strong class="user-score">
+    </strong>
+    </span>
+    |
+  </p>
+  <p class="lead pl-1">Max score : 
+    <span class="score-decoration">
+      <strong class="max-score">
+      </strong>
+    </span>
+    | 
+  </p>
   <p class="lead pl-1">Correct <%= @records.where(is_correct: true).count %> questions out of <%=@drill.questions.count%> </p>
    
- 
 	<hr class="my-4">
   <% @records.each_with_index do |r, index|%>
     <% if r.is_correct %>
@@ -59,6 +70,13 @@
     <% end %>
     <hr class="my-4">
   <% end %>
+  <a class="btn btn-primary" href="<%=drill_path(@drill)%>" role="button">
+    Retake
+  </a>
+  <a class="btn btn-primary" href="<%=drill_group_path(@drill.drill_group)%>" role="button">
+    Back To Drill Group
+  </a>
+
 </div>
 
 <script>
@@ -70,17 +88,24 @@
     easing: 'easeOutQuint'
   })
   console.log(<%=@percentage_score%>)
-  let scoreObj = { score: 0 };
+  
+  let scoreObj = { pScore: 0, uScore: 0, maxScore: 0, correct: 0 };
   let domAttributes = anime({
     targets: scoreObj,
-    score: "<%=@percentage_score%>",
+    pScore: "<%=@percentage_score%>",
+    uScore: "<%=@transcript.student_score%> ",
+    maxScore: "<%=@transcript.full_mark%>",
     duration: 4000,
     easing: 'easeOutQuint',
     round: 1,
     update: function() {
       let total = document.querySelector('.percentage-score');
-      total.innerHTML = `${scoreObj.score}%`;
+      total.innerHTML = `${scoreObj.pScore}%`;
+      let userScore = document.querySelector('.user-score');
+      userScore.innerHTML = `${scoreObj.uScore}`;
+      let maxScore = document.querySelector('.max-score');
+      maxScore.innerHTML = `${scoreObj.maxScore}`;
     }
   });
-  //let scoreObj = { pScore: 0, uScore: 0, maxScore: 0, correct: 0 };
+  
 </script>

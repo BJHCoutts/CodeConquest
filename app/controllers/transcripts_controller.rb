@@ -37,6 +37,5 @@ class TranscriptsController < ApplicationController
     @student_score = @transcript.student_score
     @total_score = @transcript.full_mark
     @percentage_score = '%.2f' % ((@student_score / Float(@total_score)) * 100)
-    # byebug
   end
 end
