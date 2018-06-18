@@ -14,7 +14,7 @@ admin_user = User.create(
   admin: true,
   is_approved: false
 )
-30.times.each do
+50.times.each do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
 
@@ -39,7 +39,7 @@ puts Cowsay.say "Created #{approved_students.count} approved studnets", :tux
 puts Cowsay.say "Created #{not_approved_students.count} not approved students", :tux
 
  
-10.times.each do
+20.times.each do
   dg = DrillGroup.create(
       title: Faker::Simpsons.quote,
       description: Faker::Hacker.say_something_smart,
@@ -51,7 +51,7 @@ end
 
 dgs = DrillGroup.all
 
-20.times.each do
+100.times.each do
   d = Drill.create(
     title: Faker::Job.key_skill,
     description: Faker::MostInterestingManInTheWorld.quote,
@@ -62,7 +62,7 @@ end
 
 drills = Drill.all
 
-200.times.each do
+600.times.each do
   options = [
     Faker::BackToTheFuture.character,
     Faker::Artist.name,
