@@ -4,17 +4,26 @@ class TranscriptsController < ApplicationController
     drill = Drill.find(params[:drill_id])
     questions = drill.questions 
     total_score = 0
-    correct_questions = []
-    wrong_questions = []
+    
     questions.each_with_index do |q, index|
-      if q.answer == params["#{index}"]
-        total_score += q.point.to_i
-        correct_questions << index
+    
+      record 
+      if taken == 0
+        record = Record.create(user: current_user, question: q, student_answer: index)
       else
-        wrong_questions << index
+        record = Record.where(user_id: current_user, question_id: q)
+      
+
+      if q.answer == params["#{index}"]
+        record.correct_time += 1
+        total_score += q.point
+      else
+        record.incorrect_time += 1
       end
+      
     end
-    transcript = Transcript.create(user: current_user, drill: drill, score: total_score, correct_questions: correct_questions, wrong_questions: wrong_questions )
+    transcript = Transcript.create(user: current_user, drill: drill, score: total_score)
+    
     
     if transcript.save
       redirect_to transcript_path(transcript)

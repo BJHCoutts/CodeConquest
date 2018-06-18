@@ -87,16 +87,14 @@ drills.each do |drill|
     Transcript.create(
       user: user, 
       drill: drill, 
-      score: (1..200).to_a.sample, 
-      taken: (1..5).to_a.sample
+      score: (1..200).to_a.sample
     )
     qs.each do |q|
       Record.create(
         user: user,
         question: q,
         student_answer: (0..4).to_a.sample,
-        correct_time: (1..10).to_a.sample,
-        incorrect_time: (1..10).to_a.sample,
+        is_correct: [true, false].sample
       )
     end
   end
