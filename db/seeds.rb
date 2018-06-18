@@ -44,7 +44,6 @@ puts Cowsay.say "Created #{not_approved_students.count} not approved students", 
   dg = DrillGroup.create(
       title: Faker::Simpsons.quote,
       description: Faker::Hacker.say_something_smart,
-      difficulty: ["Beginner", "Intermediate", "Advanced"].sample,
       user: users.sample
   )
 end
@@ -57,6 +56,7 @@ dgs = DrillGroup.all
   d = Drill.create(
     title: Faker::Job.key_skill,
     description: Faker::MostInterestingManInTheWorld.quote,
+    difficulty: ["Beginner", "Intermediate", "Advanced"].sample,
     drill_group: dgs.sample
   )
 end

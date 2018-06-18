@@ -21,6 +21,17 @@
   src: url("<%= asset_path("fonts/mortalkombat2") %>");
 }
 
+@media (max-width: 40em) {
+  .mobilehide {
+    display: none;
+  }
+}
+
 .font {
   font-family: "Righteous", cursive;
+}
+
+.pad {
+  padding: 2vw;
+  margin: 2vw;
 }

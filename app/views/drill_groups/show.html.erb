@@ -7,8 +7,6 @@
       <%=@drill_group.description%>
     </p>
     <p class="lead">
-      <%=@drill_group.difficulty%>
-      <% if current_user.admin %>
       <a href="<%= new_drill_group_drill_path(@drill_group) %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
       New Drill
     </a>
