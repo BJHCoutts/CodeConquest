@@ -24,7 +24,12 @@ html {
   flex-direction: column;
 }
 
-.entry {
+.title {
   font-size: 5vw;
-  padding: 3vh;
+  padding: 2vh 0 4vh 0;
+}
+
+.entry {
+  font-size: 3vw;
+  padding: 2vh;
 }

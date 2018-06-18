@@ -37,6 +37,11 @@
 							<i class="fas fa-home"></i> Home
 						<% end %>
 					</li>
+					<li class="nav-item">
+						<%= link_to leaderboard_path, class: 'nav-link' do %>
+							<i class="fas fa-home"></i> High Scores
+						<% end %>
+					</li>
 					<% if user_signed_in? %>
 						<li class="nav-item">
               <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
