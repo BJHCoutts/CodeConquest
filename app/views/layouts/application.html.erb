@@ -31,17 +31,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item">
-						<%= link_to leaderboard_path, class: 'nav-link' do %>
-							<i class="fas fa-home"></i> High Scores
-						<% end %>
-					</li>
 					<% if current_user %>
 						<li class="nav-item">
               <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
                 <i class="fas fa-plus"></i> Profile
               <% end %>
             </li>
+					<li class="nav-item">
+						<%= link_to leaderboard_path, class: 'nav-link' do %>
+							<i class="fas fa-home"></i> High Scores
+						<% end %>
+					</li>
 
 						<% if current_user %>
 							<li class="nav-item">
