@@ -50,9 +50,9 @@ class UsersController < ApplicationController
 
   def update_approved
     @user = User.find(params[:id])
-    @user.approved = true
+    @user.approved = !@user.approved
     @user.save
-    redirect_to users_path
+    redirect_to admin_dashboard_index_path
   end
 
   private
