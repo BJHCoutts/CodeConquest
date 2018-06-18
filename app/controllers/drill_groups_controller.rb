@@ -38,13 +38,13 @@ class DrillGroupsController < ApplicationController
   end
 
   def drill_group_params
-    params.require(:drill_group).permit(:title, :description, :difficulty)
+    params.require(:drill_group).permit(:title, :description)
   end
 
   def authorize_user!
     unless can?(:manage, @drill_group)
       flash[:alert] = "Access Denied"
-      # redirect_to 
+      redirect_to root_path
     end
   end
 end
