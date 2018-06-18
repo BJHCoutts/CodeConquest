@@ -20,7 +20,7 @@ class DrillsController < ApplicationController
   end
 
   def show
-    @questions = @drill.questions
+    @questions = @drill.questions.order(:id)
   end
 
   def edit

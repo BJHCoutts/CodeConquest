@@ -3,7 +3,7 @@ class TranscriptsController < ApplicationController
 
   def create
     drill = Drill.find(params[:drill_id])
-    questions = drill.questions 
+    questions = drill.questions.order(:id)
     full_mark = questions.sum(:point)
     
     student_score = 0
@@ -33,6 +33,7 @@ class TranscriptsController < ApplicationController
   def show
     @transcript = Transcript.find(params[:id])
     @drill = @transcript.drill
-    @records = @transcript.records
+    @records = @transcript.records.order(:id)
+    byebug
   end
 end

@@ -1,34 +1,43 @@
 <div class="container mt-4">
 	<h1 class="display-4">Your transcript for '<%= @drill.title %>'</h1>
   <p class="lead"><%= @drill.description %></p>
-  
+  Total score : <%=@transcript.student_score%>
 	<hr class="my-4">
-
   <% @records.each_with_index do |r, index|%>
     <% if r.is_correct %>
-      <div class="form-group alert-success">
+      <div class="form-group">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= r.question.body %></p>
+        <p class="lead" style="color:#4CB04F;"><%= index + 1  %>. <%= r.question.body %></p>
         </div>
         <% r.question.options.each_with_index do |option, index| %>
-          <div class="custom-control">
-            <% if r.question.answer.to_i == r.student_answer %>
-              <span>dafdsafdsafasdfdsafafd</span>
-              <i class="material-icons" style="color:#2296F3">done_all</i>
+          <div class="d-flex align-items-center mb-2">
+            <% if index == r.student_answer %>
+              <i class="material-icons mr-1" style="color:#4CB04F">check_circle</i>
+              <label class="answer" style="font-weight: bold; color: #4CB04F;"><%=option%></label>
+            <% else %>
+              <i class="material-icons mr-1" style="color:#FF9703">check_circle</i>
+              <label class="not-answer" style="color: #A6A6A6"><%=option%></label>
             <% end %>
-            <label class="custom-control-label" for="<%= r.question.body %>-<%=option%>"><%=option%></label>
           </div>
         <% end %>
       <div>
     <% else %>
-      <div class="form-group alert-danger">
+      <div class="form-group">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= r.question.body  %></p>
+        <p class="lead" style="color:#F54335;"><%= index + 1  %>. <%= r.question.body  %></p>
         </div>
-        <% r.question.options.each do |option| %>
-          <div class="custom-control">
-            <i class="material-icons primary" style="color:#2296F3">done_all</i>
-            <label class="custom-control-label" for="<%= r.question.body %>-<%=option%>"><%=option%></label>
+        <% r.question.options.each_with_index do |option, index| %>
+           <div class="d-flex align-items-center mb-2">
+            <% if index == r.student_answer %>
+              <i class="material-icons mr-1" style="color:#F54335;">check_circle</i>
+              <label class="answer" style="font-weight: bold; color:#F54335;"><%=option%></label>
+            <% elsif index == r.question.answer.to_i %>
+              <i class="material-icons mr-1" style="color:#4CB04F;">check_circle</i>
+              <label class="answer" style="font-weight: bold; color:#4CB04F;"><%=option%></label>
+            <% else %>
+              <i class="material-icons mr-1" style="color:#FF9703">check_circle</i>
+              <label class="not-answer" style="color: grey"><%=option%></label>
+            <% end %>
           </div>
         <% end %>
       <div>
