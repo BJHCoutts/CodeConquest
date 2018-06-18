@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :authorize_user!, only: [:edit, :update]
 
   def new
@@ -8,6 +7,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize! :update, @user, :message => "Denied"  
   end
 
   def update
