@@ -5,16 +5,16 @@
 	<hr class="my-4">
 
   <% @records.each_with_index do |r, index|%>
-
     <% if r.is_correct %>
       <div class="form-group alert-success">
         <div class="mb-3">
         <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= r.question.body %></p>
         </div>
         <% r.question.options.each_with_index do |option, index| %>
-          <div class="custom-control custom-radio">
-            <% if r.question.answer == index %>
-              <i class="material-icons primary" style="color:#2296F3">done_all</i>
+          <div class="custom-control">
+            <% if r.question.answer.to_i == r.student_answer %>
+              <span>dafdsafdsafasdfdsafafd</span>
+              <i class="material-icons" style="color:#2296F3">done_all</i>
             <% end %>
             <label class="custom-control-label" for="<%= r.question.body %>-<%=option%>"><%=option%></label>
           </div>
