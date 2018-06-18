@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_233219) do
+ActiveRecord::Schema.define(version: 2018_06_18_020251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,24 +46,25 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
     t.index ["drill_id"], name: "index_questions_on_drill_id"
   end
 
-  create_table "takes", force: :cascade do |t|
-    t.bigint "drill_group_id"
+  create_table "records", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "taken_time"
+    t.bigint "question_id"
+    t.integer "student_answer"
+    t.integer "correct_time"
+    t.integer "incorrect_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["drill_group_id"], name: "index_takes_on_drill_group_id"
-    t.index ["user_id"], name: "index_takes_on_user_id"
+    t.index ["question_id"], name: "index_records_on_question_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "transcripts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "drill_id"
     t.integer "score"
+    t.integer "taken"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "correct_questions", array: true
-    t.integer "wrong_questions", array: true
     t.index ["drill_id"], name: "index_transcripts_on_drill_id"
     t.index ["user_id"], name: "index_transcripts_on_user_id"
   end
@@ -83,8 +84,8 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
   add_foreign_key "questions", "drills"
-  add_foreign_key "takes", "drill_groups"
-  add_foreign_key "takes", "users"
+  add_foreign_key "records", "questions"
+  add_foreign_key "records", "users"
   add_foreign_key "transcripts", "drills"
   add_foreign_key "transcripts", "users"
 end

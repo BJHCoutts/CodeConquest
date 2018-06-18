@@ -83,18 +83,27 @@ end
 
 drills.each do |drill|
   users.shuffle[0..2].each do |user|
-    questions = drill.questions.shuffle.each_slice(2).to_a
+    qs = drill.questions 
     Transcript.create(
       user: user, 
       drill: drill, 
-      score:  (1..200).to_a.sample, 
-      correct_questions: questions[0], 
-      wrong_questions: questions[1]
-    ) 
+      score: (1..200).to_a.sample, 
+      taken: (1..5).to_a.sample
+    )
+    qs.each do |q|
+      Record.create(
+        user: user,
+        question: q,
+        student_answer: (0..4).to_a.sample,
+        correct_time: (1..10).to_a.sample,
+        incorrect_time: (1..10).to_a.sample,
+      )
+    end
   end
 end
 q = Question.all
 t = Transcript.all
+r = Record.all 
 
 puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 
@@ -103,5 +112,7 @@ puts Cowsay.say "Created #{drills.count} drills", :daemon
 puts Cowsay.say "Created #{q.count} questions", :daemon
 
 puts Cowsay.say "Created #{t.count} transcripts", :daemon
+
+puts Cowsay.say "Created #{r .count} records", :frogs
 
 puts "Login with #{admin_user.email} and password of #{PASSWORD}"
