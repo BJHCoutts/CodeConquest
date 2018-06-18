@@ -13,6 +13,7 @@
 
   </head>
   <body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
 		<div class="container">
 
 			<svg id="logo-svg" viewBox="0 0 240.4 240.4" width="50" height="50" class="d-inline-block align-top">
@@ -36,7 +37,13 @@
 							<i class="fas fa-home"></i> Home
 						<% end %>
 					</li>
-					<% if current_user && current_user.approved%>
+					<li class="nav-item">
+						<%= link_to leaderboard_path, class: 'nav-link' do %>
+							<i class="fas fa-home"></i> High Scores
+						<% end %>
+					</li>
+		
+					<% if current_user %>
 						<li class="nav-item">
               <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
                 <i class="fas fa-plus"></i> Profile
@@ -50,7 +57,7 @@
                 <% end %>
               </li>
             <% end %>
-						<% if current_user && current_user.approved%>
+						<% if current_user %>
 							<li class="nav-item">
                 <%= link_to drill_groups_path, class: 'nav-link' do %>
                   <i class="fas fa-plus"></i> Drill Groups
