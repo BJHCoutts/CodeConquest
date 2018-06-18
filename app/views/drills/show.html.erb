@@ -20,7 +20,17 @@
 				<% end %>
 			<div>
 			<% if current_user.admin %>
-				<a class="btn btn-secondary mt-4" href="<%=edit_question_path(q) %>" role="button">Edit</a>
+				<a class="btn btn-secondary mt-4 mr-2" href="<%=edit_question_path(q) %>" role="button">Edit</a>
+				 <%= link_to(
+						'Delete',
+						question_path(q),
+						method: :delete,
+						data:{
+						confirm: 'Do you wanna delete this question?'
+						},
+						class: "btn btn-danger mt-4"
+						)
+					%>
 			<% end %>
 			<hr class="my-4">
 		<% end %>

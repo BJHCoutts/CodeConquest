@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @drill = Drill.find(params[:drill_id])
     @question = Question.new
@@ -32,7 +34,10 @@ class QuestionsController < ApplicationController
   end
   
   def destroy
-
+    @question = Question.find(params[:id])
+    if @question.destroy
+      redirect_to drill_path(@question.drill)
+    end
   end
 
   private
