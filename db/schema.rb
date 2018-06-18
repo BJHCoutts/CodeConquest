@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_020251) do
 
   create_table "questions", force: :cascade do |t|
     t.string "body"
-    t.string "answer"
+    t.integer "answer"
     t.string "options", default: [], array: true
     t.integer "point"
     t.bigint "drill_id"
@@ -77,10 +77,9 @@ ActiveRecord::Schema.define(version: 2018_06_18_020251) do
     t.string "email"
     t.string "password_digest"
     t.boolean "admin", default: false
-    t.boolean "approved_student", default: false
+    t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "score", default: 0
   end
 
   add_foreign_key "drill_groups", "users"
