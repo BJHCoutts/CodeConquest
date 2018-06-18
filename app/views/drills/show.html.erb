@@ -20,7 +20,7 @@
 				<% end %>
 			<div>
 			<% if current_user.admin %>
-				<a class="btn btn-secondary mt-4 mr-2" href="<%=edit_question_path(q) %>" role="button">Edit</a>
+				<a class="btn btn-info mt-4 mr-2" href="<%=edit_question_path(q) %>" role="button">Edit</a>
 				 <%= link_to(
 						'Delete',
 						question_path(q),
