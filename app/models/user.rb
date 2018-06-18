@@ -2,7 +2,10 @@ class User < ApplicationRecord
   has_secure_password()
 
   has_many :drill_groups, dependent: :nullify
-  has_many :taken_questions, through: :transcripts, source: :question
+  has_many :transcripts
+  has_many :taken_drills, through: :transcripts, source: :drill
+  has_many :records
+  has_many :taken_questions, through: :records, source: :question
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
