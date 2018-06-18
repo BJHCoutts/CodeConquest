@@ -48,18 +48,23 @@ ActiveRecord::Schema.define(version: 2018_06_18_020251) do
   create_table "records", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "question_id"
+    t.bigint "drill_id"
+    t.bigint "transcript_id"
     t.integer "student_answer"
     t.boolean "is_correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["drill_id"], name: "index_records_on_drill_id"
     t.index ["question_id"], name: "index_records_on_question_id"
+    t.index ["transcript_id"], name: "index_records_on_transcript_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "transcripts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "drill_id"
-    t.integer "score"
+    t.integer "student_score"
+    t.integer "full_mark"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["drill_id"], name: "index_transcripts_on_drill_id"
@@ -81,7 +86,9 @@ ActiveRecord::Schema.define(version: 2018_06_18_020251) do
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
   add_foreign_key "questions", "drills"
+  add_foreign_key "records", "drills"
   add_foreign_key "records", "questions"
+  add_foreign_key "records", "transcripts"
   add_foreign_key "records", "users"
   add_foreign_key "transcripts", "drills"
   add_foreign_key "transcripts", "users"

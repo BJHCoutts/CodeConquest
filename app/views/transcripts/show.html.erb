@@ -4,28 +4,31 @@
   
 	<hr class="my-4">
 
-  <% @questions.each_with_index  do |q, index|%>
-    <% if index.in? @correct_questions %>
+  <% @records.each_with_index do |r, index|%>
+
+    <% if r.is_correct %>
       <div class="form-group alert-success">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= r.question.body %></p>
         </div>
-        <% q.options.each do |option| %>
+        <% r.question.options.each_with_index do |option, index| %>
           <div class="custom-control custom-radio">
-            <input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
-            <label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+            <% if r.question.answer == index %>
+              <i class="material-icons primary" style="color:#2296F3">done_all</i>
+            <% end %>
+            <label class="custom-control-label" for="<%= r.question.body %>-<%=option%>"><%=option%></label>
           </div>
         <% end %>
       <div>
     <% else %>
       <div class="form-group alert-danger">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= r.question.body  %></p>
         </div>
-        <% q.options.each do |option| %>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
-            <label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+        <% r.question.options.each do |option| %>
+          <div class="custom-control">
+            <i class="material-icons primary" style="color:#2296F3">done_all</i>
+            <label class="custom-control-label" for="<%= r.question.body %>-<%=option%>"><%=option%></label>
           </div>
         <% end %>
       <div>

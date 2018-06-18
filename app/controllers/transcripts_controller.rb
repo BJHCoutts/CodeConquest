@@ -1,27 +1,28 @@
 class TranscriptsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     drill = Drill.find(params[:drill_id])
     questions = drill.questions 
-    total_score = 0
+    full_mark = questions.sum(:point)
+    
+    student_score = 0
+
+    transcript = Transcript.create(user: current_user, drill: drill)
     
     questions.each_with_index do |q, index|
-    
-      if q.answer == params["#{index}"]
-        total_score += q.point
-      else
-        
+      is_correct = false
+      student_answer = params[index.to_s]
+      if q.answer == student_answer
+        is_correct = true
+        student_score += q.point
       end
-      is_correct = (q.answer == params["#{index}"])
-
-      Record.create(user: current_user, question: q, is_correct: is_correct)
-      
+      Record.create(user: current_user, transcript: transcript, drill: drill, question: q, student_answer: student_answer, is_correct: is_correct)
     end
-    total_score = questions.sum(:point)
     
-    transcript = Transcript.create(user: current_user, drill: drill, score: full_points)
-    
-    
+    transcript.student_score = student_score
+    transcript.full_mark = full_mark
+
     if transcript.save
       redirect_to transcript_path(transcript)
     else
@@ -32,14 +33,6 @@ class TranscriptsController < ApplicationController
   def show
     @transcript = Transcript.find(params[:id])
     @drill = @transcript.drill
-    @questions = @drill.questions
-    @correct_questions = @transcript.correct_questions
-    @wrong_questions = @transcript.wrong_questions
+    @records = @transcript.records
   end
-
-  private
-  def transcript_params
-    require(:transcript).permit(:score)
-  end
-
 end

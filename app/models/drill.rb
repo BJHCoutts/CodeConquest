@@ -4,6 +4,9 @@ class Drill < ApplicationRecord
   has_many :transcripts
   has_many :students, through: :transcripts, source: :user
 
+  has_many :records
+  # has_many :students, through: :records, source: :user
+
   validates :title, :description, presence: true
   # validates :difficulty, inclusion: { in: ["Beginner", "Intermediate", "Advanced"] }
 end

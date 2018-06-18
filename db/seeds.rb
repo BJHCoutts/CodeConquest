@@ -84,16 +84,20 @@ end
 drills.each do |drill|
   users.shuffle[0..2].each do |user|
     qs = drill.questions 
-    Transcript.create(
+
+    t = Transcript.create(
       user: user, 
       drill: drill, 
       student_score: (1..100).to_a.sample,
-      full_mark: (100..120).to_a.sample
+      full_mark: (100..120).to_a.sample,
     )
+
     qs.each do |q|
       Record.create(
         user: user,
         question: q,
+        drill: q.drill,
+        transcript: t,
         student_answer: (0..4).to_a.sample,
         is_correct: [true, false].sample
       )
