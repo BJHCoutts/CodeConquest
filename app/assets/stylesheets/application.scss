@@ -21,9 +21,9 @@
   src: url("<%= asset_path("fonts/mortalkombat2") %>");
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 40em) {
   .mobilehide {
-    visibility: hidden;
+    display: none;
   }
 }
 
