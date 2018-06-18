@@ -32,8 +32,12 @@ class UsersController < ApplicationController
   end
 
   def leaderboard
-    @leaders = User.order('score': :desc).limit(30).where('score IS NOT NULL')
+    # @leaders = User.order('score': :desc).limit(30).where('score IS NOT NULL')
     #we might change this controller later and add more features
+    
+    @transcripts = Transcript.select("user_id, count(*) as count_id").group("user_id").order("count_id desc").limit(10)
+    
+    
   end
 
   def update_score
@@ -41,8 +45,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:approved] == "false"
-      @users = User.where(approved: false)
+    if params[:is_approved] == "false"
+      @users = User.where(is_approved: false)
     else
       @users = User.all.order(id: :desc)
     end
@@ -50,9 +54,9 @@ class UsersController < ApplicationController
 
   def update_approved
     @user = User.find(params[:id])
-    @user.approved = true
+    @user.is_approved = !@user.is_approved
     @user.save
-    redirect_to users_path
+    redirect_to admin_dashboard_index_path
   end
 
   private

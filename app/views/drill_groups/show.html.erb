@@ -1,55 +1,63 @@
 <div class="container mt-4">
-  <div class="jumbotron">
-    <h1 class="display-4">
-      <%=@drill_group.title%>
-    </h1>
+  <% if !current_user.is_approved && !current_user.admin%>
     <p class="lead">
-      <%=@drill_group.description%>
+      You are not approved yet. We apologize for the inconvenience.  
     </p>
-    <p class="lead">
-      <a href="<%= new_drill_group_drill_path(@drill_group) %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
-      New Drill
-    </a>
-    </p>
-    <hr class="my-4">
-    <div class="accordion" id="accordionExample">
-      <% @drill_group.drills.each do |drill|%>
-        <div class="list-group" id="accordionOne">
-          <div class="expansion-panel list-group-item">
-            <button aria-controls="collapseOne" aria-expanded="false" class="expansion-panel-toggler collapsed" data-toggle="collapse" href="#collapse-drill-<%=drill.id%>" id="headingOne">
-              <%=drill.title%> 
-              <div class="expansion-panel-icon ml-3 text-black-secondary">
-                <span class="badge badge-primary badge-pill">
-                  <%=drill.questions.count%> 
-                </span>
-                <i class="collapsed-show material-icons">keyboard_arrow_down</i>
-                <i class="collapsed-hide material-icons">keyboard_arrow_up</i>
-              </div>
-            </button>
-            <div aria-labelledby="headingOne" class="collapse" data-parent="#accordionOne" id="collapse-drill-<%=drill.id%>">
-              <div class="expansion-panel-body">
-                <p>
-                  <%=drill.description%>
-                </p>
-                <a class="btn btn-primary" href="<%=drill_path(drill)%>" role="button">Take this drill</a>
-                <% if can?(:manage, drill) %>
-                <%= link_to "Edit", edit_drill_path(drill), class: "btn btn-info" %>
-                  <%= link_to(
-                    'Delete',
-                    drill_path(drill),
-                    method: :delete,
-                    data:{
-                    confirm: 'Do you wanna delete this drill?'
-                    },
-                    class: "btn btn-danger"
-                    )
-                  %>
-                <% end %>
+  <% else %>
+    <div class="jumbotron">
+      <h1 class="display-4">
+        <%=@drill_group.title%>
+      </h1>
+      <p class="lead">
+        <%=@drill_group.description%>
+      </p>
+      <%if current_user.admin %>
+        <p class="lead">
+          <a href="<%= new_drill_group_drill_path(@drill_group) %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+            New Drill
+          </a>
+        </p>
+      <%end%>
+      <hr class="my-4">
+      <div class="accordion" id="accordionExample">
+        <% @drill_group.drills.each do |drill|%>
+          <div class="list-group" id="accordionOne">
+            <div class="expansion-panel list-group-item">
+              <button aria-controls="collapseOne" aria-expanded="false" class="expansion-panel-toggler collapsed" data-toggle="collapse" href="#collapse-drill-<%=drill.id%>" id="headingOne">
+                <strong><%=drill.title%></strong>
+                <div class="expansion-panel-icon ml-3 text-black-secondary">
+                  <span class="badge badge-primary badge-pill">
+                    <%=drill.questions.count%> 
+                  </span>
+                  <i class="collapsed-show material-icons">keyboard_arrow_down</i>
+                  <i class="collapsed-hide material-icons">keyboard_arrow_up</i>
+                </div>
+              </button>
+              <div aria-labelledby="headingOne" class="collapse" data-parent="#accordionOne" id="collapse-drill-<%=drill.id%>">
+                <div class="expansion-panel-body">
+                  <p>
+                    <%=drill.description%>
+                  </p>
+                  <a class="btn btn-primary mr-2" href="<%=drill_path(drill)%>" role="button">Take this drill</a>
+                  <% if can?(:manage, drill) %>
+                  <%= link_to "Edit", edit_drill_path(drill), class: "btn btn-info mr-2" %>
+                    <%= link_to(
+                      'Delete',
+                      drill_path(drill),
+                      method: :delete,
+                      data:{
+                      confirm: 'Do you wanna delete this drill?'
+                      },
+                      class: "btn btn-danger"
+                      )
+                    %>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

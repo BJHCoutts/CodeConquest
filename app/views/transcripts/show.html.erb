@@ -1,35 +1,111 @@
 <div class="container mt-4">
-	<h1 class="display-4">Your transcript for '<%= @drill.title %>'</h1>
-  <p class="lead"><%= @drill.description %></p>
-  
-	<hr class="my-4">
+	<h1 class="display-4">
+    <span class="score-decoration">
+      <strong class="d-flex justify-content-center percentage-score">
+      </strong>
+    </span>
+  </h1>
 
-  <% @questions.each_with_index  do |q, index|%>
-    <% if index.in? @correct_questions %>
-      <div class="form-group alert-success">
+  <div class="progress mb-4 mt-4">
+    <div class="transcript progress-bar" role="progressbar" style="width: 50%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+    </div>
+  </div>
+  <p class="lead mb-2" ><i class="material-icons">details</i> Detail</p>
+  <div class="d-flex flex-wrap">
+  <p class="lead pl-1">Your score : 
+    <span class="score-decoration">
+      <strong class="user-score">
+    </strong>
+    </span>
+    |
+  </p>
+  <p class="lead pl-1">Max score : 
+    <span class="score-decoration">
+      <strong class="max-score">
+      </strong>
+    </span>
+    | 
+  </p>
+  <p class="lead pl-1">Correct <%= @records.where(is_correct: true).count %> questions out of <%=@drill.questions.count%> </p>
+   
+	<hr class="my-4">
+  <% @records.each_with_index do |r, index|%>
+    <% if r.is_correct %>
+      <div class="form-group">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+        <p class="lead" style="color:#4CB04F;"><%= index + 1  %>. <%= r.question.body %></p>
         </div>
-        <% q.options.each do |option| %>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
-            <label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+        <% r.question.options.each_with_index do |option, index| %>
+          <div class="d-flex align-items-center mb-2">
+            <% if index == r.student_answer %>
+              <i class="material-icons mr-1" style="color:#4CB04F">check_circle</i>
+              <label class="answer" style="font-weight: bold; color: #4CB04F;"><%=option%></label>
+            <% else %>
+              <i class="material-icons mr-1" style="color:#FF9703">check_circle</i>
+              <label class="not-answer" style="color: #A6A6A6"><%=option%></label>
+            <% end %>
           </div>
         <% end %>
       <div>
     <% else %>
-      <div class="form-group alert-danger">
+      <div class="form-group">
         <div class="mb-3">
-        <p class="lead" style="font-size:0.9rem"><%= index + 1  %>. <%= q.body  %></p>
+        <p class="lead" style="color:#F54335;"><%= index + 1  %>. <%= r.question.body  %></p>
         </div>
-        <% q.options.each do |option| %>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="<%= q.body %>-<%=option%>" name="<%= index %>" class="custom-control-input" value="<%=option%>">
-            <label class="custom-control-label" for="<%= q.body %>-<%=option%>"><%=option%></label>
+        <% r.question.options.each_with_index do |option, index| %>
+           <div class="d-flex align-items-center mb-2">
+            <% if index == r.student_answer %>
+              <i class="material-icons mr-1" style="color:#F54335;">check_circle</i>
+              <label class="answer" style="font-weight: bold; color:#F54335;"><%=option%></label>
+            <% elsif index == r.question.answer.to_i %>
+              <i class="material-icons mr-1" style="color:#4CB04F;">check_circle</i>
+              <label class="answer" style="font-weight: bold; color:#4CB04F;"><%=option%></label>
+            <% else %>
+              <i class="material-icons mr-1" style="color:#FF9703">check_circle</i>
+              <label class="not-answer" style="color: grey"><%=option%></label>
+            <% end %>
           </div>
         <% end %>
       <div>
     <% end %>
     <hr class="my-4">
   <% end %>
+  <a class="btn btn-primary" href="<%=drill_path(@drill)%>" role="button">
+    Retake
+  </a>
+  <a class="btn btn-primary" href="<%=drill_group_path(@drill.drill_group)%>" role="button">
+    Back To Drill Group
+  </a>
+
 </div>
+
+<script>
+  let transcriptProgressBar = anime({
+    targets: '.transcript.progress-bar',
+    duration: 5000,
+    opacity: 1,
+    width: ["0", "<%=@percentage_score%>%"],
+    easing: 'easeOutQuint'
+  })
+  console.log(<%=@percentage_score%>)
+  
+  let scoreObj = { pScore: 0, uScore: 0, maxScore: 0, correct: 0 };
+  let domAttributes = anime({
+    targets: scoreObj,
+    pScore: "<%=@percentage_score%>",
+    uScore: "<%=@transcript.student_score%> ",
+    maxScore: "<%=@transcript.full_mark%>",
+    duration: 4000,
+    easing: 'easeOutQuint',
+    round: 1,
+    update: function() {
+      let total = document.querySelector('.percentage-score');
+      total.innerHTML = `${scoreObj.pScore}%`;
+      let userScore = document.querySelector('.user-score');
+      userScore.innerHTML = `${scoreObj.uScore}`;
+      let maxScore = document.querySelector('.max-score');
+      maxScore.innerHTML = `${scoreObj.maxScore}`;
+    }
+  });
+  
+</script>

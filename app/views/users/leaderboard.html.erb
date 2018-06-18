@@ -1,15 +1,47 @@
-<%= stylesheet_link_tag 'leaderboard' %>
-
-<div class="pagecontainer mk parallax">
-<h1 class="title">
-  HIGH SCORES
-</h1>
-  <% @leaders.each do |stats| %>
- <div class="entry">
-  User <%= stats.email %><br/>has the score of
-  <%= stats.score %> points.
+<div class="container mt-4">
+  <h1 class="display-4">
+  Leaderboard      
+  </h1>
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="list-group list-group-flush">
+      <% @transcripts.each_with_index do |t, i| %>
+        <div class="row">
+          <div class="col-md-6">
+            <li class="list-group-item"><%= i + 1%>. <%= User.find(t.user_id).full_name%></li>
+          </div>
+          <div class="col-md-6">
+            <li class="list-group-item">
+              <span class="badge badge-secondary">
+                <%= t.count_id %> badges
+              </span>
+            <%= User.find(t.user_id).transcripts.sum(:student_score) %> / <%= User.find(t.user_id).transcripts.sum(:full_mark) %>
+            </li>
+          </div>
+        </div>
+      <% end %>
+      </ul>
+    </div>
+    <div class="col-md-4 justify-content-center">
+      <div class="d-flex-vertical justify-content-center align-items-center">
+        
+          <h1 class="display-4" style="text-align: center;">
+            You      
+          </h1>
+          <span class="badge badge-secondary">
+            <%=current_user.transcripts.count%> badges
+            <%= current_user.transcripts.sum(:student_score) %> / <%= current_user.transcripts.sum(:full_mark) %>
+          </span>
+        
+        <ul class="list-group">
+          <% current_user.transcripts.each_with_index do |t| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <%= t.drill.title %> | <%= t.records.where(is_correct: true).count %> corrects | <%= t.records.where(is_correct: false).count %> incorrect
+              <span class="badge badge-primary badge-pill"><%= t.student_score %> / <%= t.full_mark %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
-  <% end %>
-
 </div>
-

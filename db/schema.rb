@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_233219) do
+ActiveRecord::Schema.define(version: 2018_06_18_020251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
   create_table "drills", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "taken"
     t.bigint "drill_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
 
   create_table "questions", force: :cascade do |t|
     t.string "body"
-    t.string "answer"
+    t.integer "answer"
     t.string "options", default: [], array: true
     t.integer "point"
     t.bigint "drill_id"
@@ -46,24 +45,28 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
     t.index ["drill_id"], name: "index_questions_on_drill_id"
   end
 
-  create_table "takes", force: :cascade do |t|
-    t.bigint "drill_group_id"
+  create_table "records", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "taken_time"
+    t.bigint "question_id"
+    t.bigint "drill_id"
+    t.bigint "transcript_id"
+    t.integer "student_answer"
+    t.boolean "is_correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["drill_group_id"], name: "index_takes_on_drill_group_id"
-    t.index ["user_id"], name: "index_takes_on_user_id"
+    t.index ["drill_id"], name: "index_records_on_drill_id"
+    t.index ["question_id"], name: "index_records_on_question_id"
+    t.index ["transcript_id"], name: "index_records_on_transcript_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "transcripts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "drill_id"
-    t.integer "score"
+    t.integer "student_score"
+    t.integer "full_mark"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "correct_questions", array: true
-    t.integer "wrong_questions", array: true
     t.index ["drill_id"], name: "index_transcripts_on_drill_id"
     t.index ["user_id"], name: "index_transcripts_on_user_id"
   end
@@ -74,17 +77,18 @@ ActiveRecord::Schema.define(version: 2018_06_17_233219) do
     t.string "email"
     t.string "password_digest"
     t.boolean "admin", default: false
-    t.boolean "approved_student", default: false
+    t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "score", default: 0
   end
 
   add_foreign_key "drill_groups", "users"
   add_foreign_key "drills", "drill_groups"
   add_foreign_key "questions", "drills"
-  add_foreign_key "takes", "drill_groups"
-  add_foreign_key "takes", "users"
+  add_foreign_key "records", "drills"
+  add_foreign_key "records", "questions"
+  add_foreign_key "records", "transcripts"
+  add_foreign_key "records", "users"
   add_foreign_key "transcripts", "drills"
   add_foreign_key "transcripts", "users"
 end

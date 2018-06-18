@@ -12,7 +12,7 @@ admin_user = User.create(
   email: "js@winterfell.gov",
   password: PASSWORD,
   admin: true,
-  approved_student: false
+  is_approved: false
 )
 30.times.each do
   first_name = Faker::Name.first_name
@@ -24,15 +24,14 @@ admin_user = User.create(
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
     password: PASSWORD,
     admin: false,
-    approved_student: [true, false].sample,
-    score: 0
+    is_approved: [true, false].sample,
   )
 end
 
 users = User.all
 admins = users.where("admin = true")
-approved_students = users.where("approved_student = false")
-not_approved_students = users.where("approved_student = true")
+approved_students = users.where(is_approved: false)
+not_approved_students = users.where(is_approved: true)
 
 puts Cowsay.say "Created total #{users.count} users", :tux
 puts Cowsay.say "Created #{admins.count} admin users", :tux
@@ -83,18 +82,30 @@ end
 
 drills.each do |drill|
   users.shuffle[0..2].each do |user|
-    questions = drill.questions.shuffle.each_slice(2).to_a
-    Transcript.create(
+    qs = drill.questions 
+
+    t = Transcript.create(
       user: user, 
       drill: drill, 
-      score:  (1..200).to_a.sample, 
-      correct_questions: questions[0], 
-      wrong_questions: questions[1]
-    ) 
+      student_score: (1..100).to_a.sample,
+      full_mark: (100..120).to_a.sample,
+    )
+
+    qs.each do |q|
+      Record.create(
+        user: user,
+        question: q,
+        drill: q.drill,
+        transcript: t,
+        student_answer: (0..4).to_a.sample,
+        is_correct: [true, false].sample
+      )
+    end
   end
 end
 q = Question.all
 t = Transcript.all
+r = Record.all 
 
 puts Cowsay.say "Created #{dgs.count} drill groups", :frogs
 
@@ -103,5 +114,7 @@ puts Cowsay.say "Created #{drills.count} drills", :daemon
 puts Cowsay.say "Created #{q.count} questions", :daemon
 
 puts Cowsay.say "Created #{t.count} transcripts", :daemon
+
+puts Cowsay.say "Created #{r .count} records", :frogs
 
 puts "Login with #{admin_user.email} and password of #{PASSWORD}"
