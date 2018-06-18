@@ -26,12 +26,23 @@ p.lead {
   font-size: 3vw;
 }
 
+.score-decoration {
+  color: #2296f3;
+  text-decoration: underline wavy #2296f3;
+}
+
 @media only screen and (min-width: 768px) {
   .btn {
     font-size: 2.5vw;
   }
   p.lead {
-    font-size: 1.8vw;
+    font-size: 1.9vw;
+  }
+  label {
+    font-size: 1.6vw;
+  }
+  .material-icons {
+    font-size: 2.5vw;
   }
 }
 
